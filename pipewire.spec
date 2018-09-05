@@ -4,7 +4,7 @@
 #
 Name     : pipewire
 Version  : 0.2.3
-Release  : 1
+Release  : 2
 URL      : https://github.com/PipeWire/pipewire/archive/0.2.3.tar.gz
 Source0  : https://github.com/PipeWire/pipewire/archive/0.2.3.tar.gz
 Summary  : PipeWire Interface
@@ -14,10 +14,13 @@ Requires: pipewire-bin
 Requires: pipewire-config
 Requires: pipewire-lib
 Requires: pipewire-license
+BuildRequires : SDL2-dev
 BuildRequires : buildreq-meson
+BuildRequires : libva-dev
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(libv4l2)
+BuildRequires : pkgconfig(x11)
 
 %description
 PipeWire
@@ -79,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536124001
+export SOURCE_DATE_EPOCH=1536124084
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --prefix /usr --buildtype=plain   builddir
 ninja -v -C builddir
 

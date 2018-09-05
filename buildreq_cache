@@ -1,4 +1,7 @@
 0.2.3
+SDL2-dev
+libva-dev
 pkgconfig(alsa)
 pkgconfig(dbus-1)
 pkgconfig(libv4l2)
+pkgconfig(x11)
