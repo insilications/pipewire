@@ -1,0 +1,16 @@
+PipeWire 0.2.3
+
+- Fix deviceprovider caps introspection
+- Refcounting fixes in pipewiresrc
+- Remove clock interpolation from stream
+- Improve clock in gstreamer elements
+- Remove spalib
+- Fix crash with pw_map
+- Add version number to hook list
+- Improve driver mode in gstreamer elements
+- add daemon options
+- add man pages
+
+Work is ongoing in the work branch that features a completely new
+scheduling method that will enable audio support. Some of these
+API changes are backported in this branch.

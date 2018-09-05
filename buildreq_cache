@@ -1,0 +1,4 @@
+0.2.3
+pkgconfig(alsa)
+pkgconfig(dbus-1)
+pkgconfig(libv4l2)
