@@ -1,7 +1,14 @@
-0.2.3
+0.2.4
 SDL2-dev
+dbus-dev
+glib-dev
+gst-plugins-base-dev
+gstreamer-dev
 libva-dev
 pkgconfig(alsa)
 pkgconfig(dbus-1)
+pkgconfig(gstreamer-audio-1.0)
 pkgconfig(libv4l2)
+pkgconfig(systemd)
 pkgconfig(x11)
+sbc-dev
