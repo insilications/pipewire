@@ -4,7 +4,7 @@
 #
 Name     : pipewire
 Version  : 0.2.5
-Release  : 4
+Release  : 5
 URL      : https://github.com/PipeWire/pipewire/archive/0.2.5.tar.gz
 Source0  : https://github.com/PipeWire/pipewire/archive/0.2.5.tar.gz
 Summary  : No detailed summary available
@@ -22,11 +22,13 @@ BuildRequires : gst-plugins-base-dev
 BuildRequires : gstreamer-dev
 BuildRequires : libva-dev
 BuildRequires : pkgconfig(alsa)
+BuildRequires : pkgconfig(dbus-1)
 BuildRequires : pkgconfig(gstreamer-audio-1.0)
 BuildRequires : pkgconfig(libv4l2)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : pkgconfig(x11)
 BuildRequires : sbc-dev
+Patch1: 0001-Avoid-invalid-conversion-error-with-C-compilators.patch
 
 %description
 PipeWire
@@ -82,13 +84,14 @@ services components for the pipewire package.
 
 %prep
 %setup -q -n pipewire-0.2.5
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545314986
+export SOURCE_DATE_EPOCH=1547679564
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --prefix /usr --buildtype=plain   builddir
 ninja -v -C builddir
 
