@@ -4,7 +4,7 @@
 #
 Name     : pipewire
 Version  : 0.2.5
-Release  : 5
+Release  : 6
 URL      : https://github.com/PipeWire/pipewire/archive/0.2.5.tar.gz
 Source0  : https://github.com/PipeWire/pipewire/archive/0.2.5.tar.gz
 Summary  : No detailed summary available
