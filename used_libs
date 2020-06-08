@@ -10,8 +10,10 @@ libgstaudio-1.0.so.0
 libgstbase-1.0.so.0
 libgstreamer-1.0.so.0
 libgstvideo-1.0.so.0
+libjack.so.0
 libm.so.6
 libpthread.so.0
+libpulse.so.0
 libsbc.so.1
 libsndfile.so.1
 libsystemd.so.0
