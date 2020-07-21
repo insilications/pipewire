@@ -1,3 +1,168 @@
+PipeWire 0.3.7
+
+This is a bugfix release that is API and ABI compatible
+with previous 0.3.x releases.
+
+- Improved PulseAudio compatibility. The alsa card profile
+  code was reused from PulseAudio. Devices now support
+  all profiles, ports, jack detection, UCM and hardware
+  mixers that PulseAudio implements. There should not
+  be (almost) any difference between PipeWire and PulseAudio
+  in how it presents and manages devices.
+  Other missing API pieces such as the default sink/source
+  and move_stream are implemented now.  At this point
+  it should be possible to replace PulseAudio with the
+  compatibility layer for those who want to try.
+
+- Many fixes and improvements to the GStreamer elements.
+  pipewiresrc now has the ability to periodically resend
+  the last frame. This makes it possible for use-cases like
+  screensharing to only update the screen on changes while
+  still keeping the client side encoder busy. PipeWire
+  elements can now also share a connection between them.
+
+- Improvements to the bluetooth nodes. Dynamically adding
+  and removing devices should work much smoother now. Many
+  fixes and improvements to a2dp and sco nodes.
+
+- Reduced memory usage by using less pre-allocated memory
+  where possible. JACK clients are especially using less
+  memory.
+
+- Support for passive links is added again. These are links
+  that don't cause the associated driver to become active.
+  This makes it possible to have blocks of effects+sinks go
+  to suspend as a group when not in use.
+
+- Both consumers and producers can now ask to renegotiate
+  the format. This required some cleanups and improvements
+  to how links and node states were handled. More work is
+  needed to implement more use cases.
+
+- Important fixes to how memory is shared with clients. Memory
+  was not correctly freed in all cases, which would result
+  in reuse of the wrong memory.
+
+- Support for planar formats for audio and video was added.
+
+- Improved error handling in the session manager.
+
+- Metadata is now used to manage default audio source and
+  sink devices. The session manager will try to link streams
+  to the default device. Changing the default device will
+  move streams to the new device. PulseAudio and JACK layers
+  respect the default source/sinks.
+
+- Metadata is used to tag the desired output device for
+  a stream and the session manager will move streams when
+  the metadata changes. The PulseAudio layer uses this to
+  implement the move_stream feature.
+
+- Many fixes to the security modules. The session manager now
+  has a flatpak module that grants permissions to flatpak
+  apps. The PulseAudio layer now respects the permissions of
+  objects. Security related properties are made read-only
+  now. Different access modules can now coexist.
+
+- The portal module has been split up in 2 parts:
+   1) a part living in the daemon that monitors the portal
+      dbus owner and tags all clients from this PID. This
+      part has to run in the daemon in order to securely
+      tag the clients.
+   2) a part in the session manager that uses the permission
+      store to manage the permissions of portal managed
+      clients.
+
+
+Older versions:
+
+
+PipeWire 0.3.6
+
+This is a bugfix release that is API and ABI compatible
+with previous 0.3.x releases.
+
+- Extensive memory leak fixing and stress testing was done.
+  A big leak in screen sharing with DMA-BUF was fixed.
+- Compile fixes
+- Stability improvements in jack and pulseaudio layers.
+- Added the old portal module to make the Camera portal
+  work again. This will be moved to the session manager in
+  future versions.
+- Improvements to the GStreamer source and sink shutdown.
+- Fix compatibility with v2 clients again when negotiating
+  buffers.
+
+
+PipeWire 0.3.5
+
+This is a bugfix release that is API and ABI compatible
+with previous 0.3.x releases.
+
+- Compiler fixes
+- Add pw-midiplay and pw-midirecord aliases
+- Add pw-mididump tool
+- Add pw-metadata tool to inspect, add and remove metadata
+  for objects.
+- Docs updates, man pages
+- install alsa config files
+- Fix linked sink/source in pulseaudio
+- ratelimit graph processing warnings
+- improve buffer handling in GStreamer elements
+- Fix power usage by removing the queue for the alsa
+  sequencer system announce messages.
+- Fix metadata clear() method dispatch.
+- Improve parameter enumeration, make it possible to detect
+  missing parameters vs no-compatible parameters so that we
+  can use defaults in the first case and error in the second
+  case.
+- Fix cleanup of proxy objects. Stability improvements on
+  plug/unplug in session manager.
+- Make it possible to set log level from config file
+- improve debug of param negotiation errors. Log the
+  parameters to stderr/journal.
+- Make it possible to configure global logger
+  implementation.
+- Fix NEON detection
+- JACK and PulseAudio compatibility improvements
+
+
+PipeWire 0.3.4
+
+This is a bugfix release that is API and ABI compatible
+with previous 0.3.x releases.
+
+- A quick update with some important stability fixes.
+
+
+PipeWire 0.3.3
+
+This is a bugfix release that is API and ABI compatible
+with previous 0.3.x releases.
+
+- NEON optimizations for audio conversion (32 and 64 bits)
+- rework of session manager implementation
+- Add option to disable modules in the session manager
+- Release midi hardware devices when suspended
+- various build fixes
+- Clean up options of various utils
+- Stability improvements
+- Mayor improvements in pulseaudio emulation. Improved
+  timings and compatibility.
+- Implementation of drain and flush in pulse and alsa
+  emulation.
+- Implement poll on file descriptors.
+- Improvement of metadata for jack emulation.
+- Fix memory and thread problems in jack emulation.
+- Simplification of state changes. Should make more use
+  cases work in the jack emulation.
+- Improvements in the gstreamer elements. Removal of
+  extra internal queue. pipewiresink can now be used to
+  play audio.
+- Add pw-jack and pw-pulse scripts to run pulseaudio and
+  jack applications with the right library path.
+
+
 PipeWire 0.3.2
 
 This is a bugfix release that is API and ABI compatible
@@ -36,8 +201,6 @@ with previous 0.3.x releases.
 - Allow the server to go up to the maximum quantum (8192
   samples or ~=180ms) if a client explicitly wants this.
 
-
-Older versions:
 
 PipeWire 0.3.1
 
