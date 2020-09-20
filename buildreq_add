@@ -1,2 +1,15 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+SDL2-dev
+SDL2-staticdev
+buildreq-meson
+dbus-dev
+glib-dev
+glib-staticdev
+gst-plugins-base-dev
+gstreamer-dev
+libsndfile-dev
+libsndfile-staticdev
+sbc-dev
+Vulkan-Headers-dev
+Vulkan-Loader-dev

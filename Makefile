@@ -1,5 +1,5 @@
 PKG_NAME := pipewire
-URL = https://github.com/PipeWire/pipewire/archive/0.3.2/pipewire-0.3.2.tar.gz
+URL = https://gitlab.freedesktop.org/pipewire/pipewire.git
 ARCHIVES = 
 
 include ../common/Makefile.common
