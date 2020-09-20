@@ -4,15 +4,14 @@
 #
 %define keepstatic 1
 Name     : pipewire
-Version  : 0.3.12
-Release  : 10
-URL      : file:///insilications/build/clearlinux/packages/pipewire/pipewire-0.3.12.tar.gz
-Source0  : file:///insilications/build/clearlinux/packages/pipewire/pipewire-0.3.12.tar.gz
+Version  : 0.2.7
+Release  : 11
+URL      : file:///insilications/build/clearlinux/packages/pipewire/pipewire-0.2.7.tar.gz
+Source0  : file:///insilications/build/clearlinux/packages/pipewire/pipewire-0.2.7.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1+
 Requires: pipewire-bin = %{version}-%{release}
-Requires: pipewire-data = %{version}-%{release}
 Requires: pipewire-lib = %{version}-%{release}
 Requires: pipewire-services = %{version}-%{release}
 BuildRequires : SDL2-dev
@@ -27,6 +26,7 @@ BuildRequires : gst-plugins-base-dev
 BuildRequires : gstreamer-dev
 BuildRequires : libsndfile-dev
 BuildRequires : libsndfile-staticdev
+BuildRequires : libva-dev
 BuildRequires : pkgconfig(alsa)
 BuildRequires : pkgconfig(bluez)
 BuildRequires : pkgconfig(dbus-1)
@@ -36,10 +36,12 @@ BuildRequires : pkgconfig(gstreamer-plugins-base-1.0)
 BuildRequires : pkgconfig(jack)
 BuildRequires : pkgconfig(libpulse)
 BuildRequires : pkgconfig(libsystemd)
+BuildRequires : pkgconfig(libva)
 BuildRequires : pkgconfig(sbc)
 BuildRequires : pkgconfig(sndfile)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : pkgconfig(vulkan)
+BuildRequires : pkgconfig(x11)
 BuildRequires : sbc-dev
 # Suppress stripping binaries
 %define __strip /bin/true
@@ -50,26 +52,18 @@ BuildRequires : sbc-dev
 AutoReq: no
 
 %description
-# PipeWire
-[PipeWire](https://pipewire.org) is a server and user space API to
-deal with multimedia pipelines. This includes:
+PipeWire
+--------
+PipeWire is a server and user space API to deal with multimedia
+pipelines. This includes:
 
 %package bin
 Summary: bin components for the pipewire package.
 Group: Binaries
-Requires: pipewire-data = %{version}-%{release}
 Requires: pipewire-services = %{version}-%{release}
 
 %description bin
 bin components for the pipewire package.
-
-
-%package data
-Summary: data components for the pipewire package.
-Group: Data
-
-%description data
-data components for the pipewire package.
 
 
 %package dev
@@ -77,7 +71,6 @@ Summary: dev components for the pipewire package.
 Group: Development
 Requires: pipewire-lib = %{version}-%{release}
 Requires: pipewire-bin = %{version}-%{release}
-Requires: pipewire-data = %{version}-%{release}
 Provides: pipewire-devel = %{version}-%{release}
 Requires: pipewire = %{version}-%{release}
 
@@ -88,7 +81,6 @@ dev components for the pipewire package.
 %package lib
 Summary: lib components for the pipewire package.
 Group: Libraries
-Requires: pipewire-data = %{version}-%{release}
 
 %description lib
 lib components for the pipewire package.
@@ -112,22 +104,22 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1600578271
+export SOURCE_DATE_EPOCH=1600587890
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 ## altflags1 content
-export CFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export CFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -DPIC -ffat-lto-objects -fPIC"
 # -ffat-lto-objects -fno-PIE -fno-PIE -m64 -no-pie -fpic -fvisibility=hidden -flto-partition=none
-# gcc: -feliminate-unused-debug-types -fipa-pta -flto=16 -Wno-error -Wp,-D_REENTRANT -fno-common
-export CXXFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -ffat-lto-objects -fPIC"
+# gcc: -feliminate-unused-debug-types -fipa-pta -flto=16 -Wno-error -Wp,-D_REENTRANT -fno-common -fno-plt -fno-semantic-interposition
+export CXXFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -fvisibility-inlines-hidden -pipe -DPIC -ffat-lto-objects -fPIC"
 #
-export FCFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export FFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export CFFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export FCFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -DPIC -ffat-lto-objects -fPIC"
+export FFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -DPIC -ffat-lto-objects -fPIC"
+export CFFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -DPIC -ffat-lto-objects -fPIC"
 #
-export LDFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-semantic-interposition -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -fno-plt -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export LDFLAGS="-g -O3 -march=native -mtune=native -fgraphite-identity -Wall -Wl,--as-needed -Wl,--build-id=sha1 -Wl,--enable-new-dtags -Wl,--hash-style=gnu -Wl,-O2 -Wl,-z,now -Wl,-z,relro -falign-functions=32 -flimit-function-alignment -fasynchronous-unwind-tables -fdevirtualize-at-ltrans -floop-nest-optimize -fno-math-errno -fno-stack-protector -fno-trapping-math -ftree-loop-distribute-patterns -ftree-loop-vectorize -ftree-vectorize -funroll-loops -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -feliminate-unused-debug-types -fipa-pta -flto=16 -mtls-dialect=gnu2 -Wl,-sort-common -Wno-error -Wp,-D_REENTRANT -pipe -DPIC -ffat-lto-objects -fPIC"
 #
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -147,284 +139,135 @@ export MAKEFLAGS=%{?_smp_mflags}
 ##
 %define _lto_cflags 1
 ##
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dvulkan=true -Ddefault_library=both  builddir
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dvulkan=true -Ddefault_library=shared  builddir
 ninja -v -C builddir
-
-%check
-export LANG=C.UTF-8
-unset http_proxy
-unset https_proxy
-unset no_proxy
-export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
-meson test -C builddir
 
 %install
 DESTDIR=%{buildroot} ninja -C builddir install
 
 %files
 %defattr(-,root,root,-)
-/lib/udev/rules.d/90-pipewire-alsa.rules
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/pipewire
-/usr/bin/pipewire-media-session
-/usr/bin/pw-cat
-/usr/bin/pw-cli
-/usr/bin/pw-dot
-/usr/bin/pw-jack
-/usr/bin/pw-metadata
-/usr/bin/pw-mididump
-/usr/bin/pw-midiplay
-/usr/bin/pw-midirecord
-/usr/bin/pw-mon
-/usr/bin/pw-play
-/usr/bin/pw-profiler
-/usr/bin/pw-pulse
-/usr/bin/pw-record
+/usr/bin/pipewire-cli
+/usr/bin/pipewire-monitor
 /usr/bin/spa-inspect
 /usr/bin/spa-monitor
 
-%files data
-%defattr(-,root,root,-)
-/usr/share/alsa-card-profile/mixer/paths/analog-input-aux.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-dock-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-fm.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-front-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-headphone-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-headset-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic-always.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-internal-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-linein.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-mic-line.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-mic.conf.common
-/usr/share/alsa-card-profile/mixer/paths/analog-input-rear-mic.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-tvtuner.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input-video.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-input.conf.common
-/usr/share/alsa-card-profile/mixer/paths/analog-output-headphones-2.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output-headphones.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output-lineout.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output-mono.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output-speaker-always.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output-speaker.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output.conf
-/usr/share/alsa-card-profile/mixer/paths/analog-output.conf.common
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-0.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-1.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-2.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-3.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-4.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-5.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-6.conf
-/usr/share/alsa-card-profile/mixer/paths/hdmi-output-7.conf
-/usr/share/alsa-card-profile/mixer/paths/iec958-stereo-input.conf
-/usr/share/alsa-card-profile/mixer/paths/iec958-stereo-output.conf
-/usr/share/alsa-card-profile/mixer/paths/steelseries-arctis-output-chat-common.conf
-/usr/share/alsa-card-profile/mixer/paths/steelseries-arctis-output-game-common.conf
-/usr/share/alsa-card-profile/mixer/paths/usb-gaming-headset-input.conf
-/usr/share/alsa-card-profile/mixer/paths/usb-gaming-headset-output-mono.conf
-/usr/share/alsa-card-profile/mixer/paths/usb-gaming-headset-output-stereo.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/cmedia-high-speed-true-hdaudio.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/default.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/dell-dock-tb16-usb-audio.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/force-speaker-and-int-mic.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/force-speaker.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/kinect-audio.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/maudio-fasttrack-pro.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-audio4dj.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-audio8dj.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-korecontroller.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-traktor-audio10.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-traktor-audio2.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-traktor-audio6.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/native-instruments-traktorkontrol-s4.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/sb-omni-surround-5.1.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/steelseries-arctis-common-usb-audio.conf
-/usr/share/alsa-card-profile/mixer/profile-sets/usb-gaming-headset.conf
-/usr/share/alsa/alsa.conf.d/50-pipewire.conf
-/usr/share/alsa/alsa.conf.d/99-pipewire-default.conf
-
 %files dev
 %defattr(-,root,root,-)
-/usr/include/pipewire-0.3/pipewire/array.h
-/usr/include/pipewire-0.3/pipewire/buffers.h
-/usr/include/pipewire-0.3/pipewire/client.h
-/usr/include/pipewire-0.3/pipewire/context.h
-/usr/include/pipewire-0.3/pipewire/control.h
-/usr/include/pipewire-0.3/pipewire/core.h
-/usr/include/pipewire-0.3/pipewire/data-loop.h
-/usr/include/pipewire-0.3/pipewire/device.h
-/usr/include/pipewire-0.3/pipewire/extensions/client-node.h
-/usr/include/pipewire-0.3/pipewire/extensions/metadata.h
-/usr/include/pipewire-0.3/pipewire/extensions/profiler.h
-/usr/include/pipewire-0.3/pipewire/extensions/protocol-native.h
-/usr/include/pipewire-0.3/pipewire/extensions/session-manager.h
-/usr/include/pipewire-0.3/pipewire/extensions/session-manager/impl-interfaces.h
-/usr/include/pipewire-0.3/pipewire/extensions/session-manager/interfaces.h
-/usr/include/pipewire-0.3/pipewire/extensions/session-manager/introspect-funcs.h
-/usr/include/pipewire-0.3/pipewire/extensions/session-manager/introspect.h
-/usr/include/pipewire-0.3/pipewire/extensions/session-manager/keys.h
-/usr/include/pipewire-0.3/pipewire/factory.h
-/usr/include/pipewire-0.3/pipewire/filter.h
-/usr/include/pipewire-0.3/pipewire/global.h
-/usr/include/pipewire-0.3/pipewire/impl-client.h
-/usr/include/pipewire-0.3/pipewire/impl-core.h
-/usr/include/pipewire-0.3/pipewire/impl-device.h
-/usr/include/pipewire-0.3/pipewire/impl-factory.h
-/usr/include/pipewire-0.3/pipewire/impl-link.h
-/usr/include/pipewire-0.3/pipewire/impl-module.h
-/usr/include/pipewire-0.3/pipewire/impl-node.h
-/usr/include/pipewire-0.3/pipewire/impl-port.h
-/usr/include/pipewire-0.3/pipewire/impl.h
-/usr/include/pipewire-0.3/pipewire/keys.h
-/usr/include/pipewire-0.3/pipewire/link.h
-/usr/include/pipewire-0.3/pipewire/log.h
-/usr/include/pipewire-0.3/pipewire/loop.h
-/usr/include/pipewire-0.3/pipewire/main-loop.h
-/usr/include/pipewire-0.3/pipewire/map.h
-/usr/include/pipewire-0.3/pipewire/mem.h
-/usr/include/pipewire-0.3/pipewire/module.h
-/usr/include/pipewire-0.3/pipewire/node.h
-/usr/include/pipewire-0.3/pipewire/permission.h
-/usr/include/pipewire-0.3/pipewire/pipewire.h
-/usr/include/pipewire-0.3/pipewire/port.h
-/usr/include/pipewire-0.3/pipewire/properties.h
-/usr/include/pipewire-0.3/pipewire/protocol.h
-/usr/include/pipewire-0.3/pipewire/proxy.h
-/usr/include/pipewire-0.3/pipewire/resource.h
-/usr/include/pipewire-0.3/pipewire/stream.h
-/usr/include/pipewire-0.3/pipewire/thread-loop.h
-/usr/include/pipewire-0.3/pipewire/type.h
-/usr/include/pipewire-0.3/pipewire/utils.h
-/usr/include/pipewire-0.3/pipewire/version.h
-/usr/include/pipewire-0.3/pipewire/work-queue.h
-/usr/include/spa-0.2/spa/buffer/alloc.h
-/usr/include/spa-0.2/spa/buffer/buffer.h
-/usr/include/spa-0.2/spa/buffer/meta.h
-/usr/include/spa-0.2/spa/buffer/type-info.h
-/usr/include/spa-0.2/spa/control/control.h
-/usr/include/spa-0.2/spa/control/type-info.h
-/usr/include/spa-0.2/spa/debug/buffer.h
-/usr/include/spa-0.2/spa/debug/dict.h
-/usr/include/spa-0.2/spa/debug/format.h
-/usr/include/spa-0.2/spa/debug/mem.h
-/usr/include/spa-0.2/spa/debug/node.h
-/usr/include/spa-0.2/spa/debug/pod.h
-/usr/include/spa-0.2/spa/debug/types.h
-/usr/include/spa-0.2/spa/graph/graph.h
-/usr/include/spa-0.2/spa/monitor/device.h
-/usr/include/spa-0.2/spa/monitor/event.h
-/usr/include/spa-0.2/spa/monitor/utils.h
-/usr/include/spa-0.2/spa/node/command.h
-/usr/include/spa-0.2/spa/node/event.h
-/usr/include/spa-0.2/spa/node/io.h
-/usr/include/spa-0.2/spa/node/keys.h
-/usr/include/spa-0.2/spa/node/node.h
-/usr/include/spa-0.2/spa/node/type-info.h
-/usr/include/spa-0.2/spa/node/utils.h
-/usr/include/spa-0.2/spa/param/audio/format-utils.h
-/usr/include/spa-0.2/spa/param/audio/format.h
-/usr/include/spa-0.2/spa/param/audio/layout.h
-/usr/include/spa-0.2/spa/param/audio/raw.h
-/usr/include/spa-0.2/spa/param/audio/type-info.h
-/usr/include/spa-0.2/spa/param/format-utils.h
-/usr/include/spa-0.2/spa/param/format.h
-/usr/include/spa-0.2/spa/param/param.h
-/usr/include/spa-0.2/spa/param/profiler.h
-/usr/include/spa-0.2/spa/param/props.h
-/usr/include/spa-0.2/spa/param/type-info.h
-/usr/include/spa-0.2/spa/param/video/chroma.h
-/usr/include/spa-0.2/spa/param/video/color.h
-/usr/include/spa-0.2/spa/param/video/encoded.h
-/usr/include/spa-0.2/spa/param/video/format-utils.h
-/usr/include/spa-0.2/spa/param/video/format.h
-/usr/include/spa-0.2/spa/param/video/multiview.h
-/usr/include/spa-0.2/spa/param/video/raw.h
-/usr/include/spa-0.2/spa/param/video/type-info.h
-/usr/include/spa-0.2/spa/pod/builder.h
-/usr/include/spa-0.2/spa/pod/command.h
-/usr/include/spa-0.2/spa/pod/compare.h
-/usr/include/spa-0.2/spa/pod/event.h
-/usr/include/spa-0.2/spa/pod/filter.h
-/usr/include/spa-0.2/spa/pod/iter.h
-/usr/include/spa-0.2/spa/pod/parser.h
-/usr/include/spa-0.2/spa/pod/pod.h
-/usr/include/spa-0.2/spa/pod/vararg.h
-/usr/include/spa-0.2/spa/support/cpu.h
-/usr/include/spa-0.2/spa/support/dbus.h
-/usr/include/spa-0.2/spa/support/log-impl.h
-/usr/include/spa-0.2/spa/support/log.h
-/usr/include/spa-0.2/spa/support/loop.h
-/usr/include/spa-0.2/spa/support/plugin.h
-/usr/include/spa-0.2/spa/support/system.h
-/usr/include/spa-0.2/spa/utils/defs.h
-/usr/include/spa-0.2/spa/utils/dict.h
-/usr/include/spa-0.2/spa/utils/hook.h
-/usr/include/spa-0.2/spa/utils/keys.h
-/usr/include/spa-0.2/spa/utils/list.h
-/usr/include/spa-0.2/spa/utils/names.h
-/usr/include/spa-0.2/spa/utils/result.h
-/usr/include/spa-0.2/spa/utils/ringbuffer.h
-/usr/include/spa-0.2/spa/utils/type-info.h
-/usr/include/spa-0.2/spa/utils/type.h
-/usr/lib64/alsa-lib/libasound_module_ctl_pipewire.so
-/usr/lib64/alsa-lib/libasound_module_pcm_pipewire.so
-/usr/lib64/libpipewire-0.3.so
-/usr/lib64/pkgconfig/libpipewire-0.3.pc
-/usr/lib64/pkgconfig/libspa-0.2.pc
+/usr/include/pipewire/array.h
+/usr/include/pipewire/client.h
+/usr/include/pipewire/command.h
+/usr/include/pipewire/control.h
+/usr/include/pipewire/core.h
+/usr/include/pipewire/data-loop.h
+/usr/include/pipewire/extensions/client-node.h
+/usr/include/pipewire/extensions/protocol-native.h
+/usr/include/pipewire/factory.h
+/usr/include/pipewire/global.h
+/usr/include/pipewire/interfaces.h
+/usr/include/pipewire/introspect.h
+/usr/include/pipewire/link.h
+/usr/include/pipewire/log.h
+/usr/include/pipewire/loop.h
+/usr/include/pipewire/main-loop.h
+/usr/include/pipewire/map.h
+/usr/include/pipewire/mem.h
+/usr/include/pipewire/module.h
+/usr/include/pipewire/node.h
+/usr/include/pipewire/pipewire.h
+/usr/include/pipewire/port.h
+/usr/include/pipewire/properties.h
+/usr/include/pipewire/protocol.h
+/usr/include/pipewire/proxy.h
+/usr/include/pipewire/remote.h
+/usr/include/pipewire/resource.h
+/usr/include/pipewire/stream.h
+/usr/include/pipewire/thread-loop.h
+/usr/include/pipewire/type.h
+/usr/include/pipewire/utils.h
+/usr/include/pipewire/version.h
+/usr/include/pipewire/work-queue.h
+/usr/include/spa/buffer/buffer.h
+/usr/include/spa/buffer/meta.h
+/usr/include/spa/clock/clock.h
+/usr/include/spa/graph/graph.h
+/usr/include/spa/monitor/monitor.h
+/usr/include/spa/node/command.h
+/usr/include/spa/node/event.h
+/usr/include/spa/node/io.h
+/usr/include/spa/node/node.h
+/usr/include/spa/param/audio/format-utils.h
+/usr/include/spa/param/audio/format.h
+/usr/include/spa/param/audio/raw-utils.h
+/usr/include/spa/param/audio/raw.h
+/usr/include/spa/param/buffers.h
+/usr/include/spa/param/format-utils.h
+/usr/include/spa/param/format.h
+/usr/include/spa/param/io.h
+/usr/include/spa/param/meta.h
+/usr/include/spa/param/param.h
+/usr/include/spa/param/props.h
+/usr/include/spa/param/video/chroma.h
+/usr/include/spa/param/video/color.h
+/usr/include/spa/param/video/encoded.h
+/usr/include/spa/param/video/format-utils.h
+/usr/include/spa/param/video/format.h
+/usr/include/spa/param/video/multiview.h
+/usr/include/spa/param/video/raw-utils.h
+/usr/include/spa/param/video/raw.h
+/usr/include/spa/pod/builder.h
+/usr/include/spa/pod/command.h
+/usr/include/spa/pod/event.h
+/usr/include/spa/pod/iter.h
+/usr/include/spa/pod/parser.h
+/usr/include/spa/pod/pod.h
+/usr/include/spa/support/log-impl.h
+/usr/include/spa/support/log.h
+/usr/include/spa/support/loop.h
+/usr/include/spa/support/plugin.h
+/usr/include/spa/support/type-map-impl.h
+/usr/include/spa/support/type-map.h
+/usr/include/spa/utils/defs.h
+/usr/include/spa/utils/dict.h
+/usr/include/spa/utils/hook.h
+/usr/include/spa/utils/list.h
+/usr/include/spa/utils/ringbuffer.h
+/usr/include/spa/utils/type.h
+/usr/lib64/libpipewire-0.2.so
+/usr/lib64/pkgconfig/libpipewire-0.2.pc
+/usr/lib64/pkgconfig/libspa-0.1.pc
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/gstreamer-1.0/libgstpipewire.so
-/usr/lib64/libpipewire-0.3.so.0
-/usr/lib64/libpipewire-0.3.so.0.312.0
-/usr/lib64/pipewire-0.3/jack/libjack.so
-/usr/lib64/pipewire-0.3/jack/libjack.so.0
-/usr/lib64/pipewire-0.3/jack/libjack.so.0.312.0
-/usr/lib64/pipewire-0.3/jack/libjacknet.so
-/usr/lib64/pipewire-0.3/jack/libjacknet.so.0
-/usr/lib64/pipewire-0.3/jack/libjacknet.so.0.312.0
-/usr/lib64/pipewire-0.3/jack/libjackserver.so
-/usr/lib64/pipewire-0.3/jack/libjackserver.so.0
-/usr/lib64/pipewire-0.3/jack/libjackserver.so.0.312.0
-/usr/lib64/pipewire-0.3/libpipewire-module-access.so
-/usr/lib64/pipewire-0.3/libpipewire-module-adapter.so
-/usr/lib64/pipewire-0.3/libpipewire-module-client-device.so
-/usr/lib64/pipewire-0.3/libpipewire-module-client-node.so
-/usr/lib64/pipewire-0.3/libpipewire-module-link-factory.so
-/usr/lib64/pipewire-0.3/libpipewire-module-metadata.so
-/usr/lib64/pipewire-0.3/libpipewire-module-portal.so
-/usr/lib64/pipewire-0.3/libpipewire-module-profiler.so
-/usr/lib64/pipewire-0.3/libpipewire-module-protocol-native.so
-/usr/lib64/pipewire-0.3/libpipewire-module-rtkit.so
-/usr/lib64/pipewire-0.3/libpipewire-module-session-manager.so
-/usr/lib64/pipewire-0.3/libpipewire-module-spa-device-factory.so
-/usr/lib64/pipewire-0.3/libpipewire-module-spa-device.so
-/usr/lib64/pipewire-0.3/libpipewire-module-spa-node-factory.so
-/usr/lib64/pipewire-0.3/libpipewire-module-spa-node.so
-/usr/lib64/pipewire-0.3/pulse/libpulse-mainloop-glib.so
-/usr/lib64/pipewire-0.3/pulse/libpulse-mainloop-glib.so.0
-/usr/lib64/pipewire-0.3/pulse/libpulse-mainloop-glib.so.0.312.0
-/usr/lib64/pipewire-0.3/pulse/libpulse-simple.so
-/usr/lib64/pipewire-0.3/pulse/libpulse-simple.so.0
-/usr/lib64/pipewire-0.3/pulse/libpulse-simple.so.0.312.0
-/usr/lib64/pipewire-0.3/pulse/libpulse.so
-/usr/lib64/pipewire-0.3/pulse/libpulse.so.0
-/usr/lib64/pipewire-0.3/pulse/libpulse.so.0.312.0
-/usr/lib64/spa-0.2/alsa/libspa-alsa.so
-/usr/lib64/spa-0.2/audioconvert/libspa-audioconvert.so
-/usr/lib64/spa-0.2/audiomixer/libspa-audiomixer.so
-/usr/lib64/spa-0.2/bluez5/libspa-bluez5.so
-/usr/lib64/spa-0.2/control/libspa-control.so
-/usr/lib64/spa-0.2/jack/libspa-jack.so
-/usr/lib64/spa-0.2/support/libspa-dbus.so
-/usr/lib64/spa-0.2/support/libspa-support.so
-/usr/lib64/spa-0.2/v4l2/libspa-v4l2.so
-/usr/lib64/spa-0.2/videoconvert/libspa-videoconvert.so
-/usr/lib64/spa-0.2/vulkan/libspa-vulkan.so
+/usr/lib64/libpipewire-0.2.so.1
+/usr/lib64/libpipewire-0.2.so.1.207.0
+/usr/lib64/pipewire-0.2/libpipewire-module-audio-dsp.so
+/usr/lib64/pipewire-0.2/libpipewire-module-autolink.so
+/usr/lib64/pipewire-0.2/libpipewire-module-client-node.so
+/usr/lib64/pipewire-0.2/libpipewire-module-link-factory.so
+/usr/lib64/pipewire-0.2/libpipewire-module-mixer.so
+/usr/lib64/pipewire-0.2/libpipewire-module-portal.so
+/usr/lib64/pipewire-0.2/libpipewire-module-protocol-native.so
+/usr/lib64/pipewire-0.2/libpipewire-module-rtkit.so
+/usr/lib64/pipewire-0.2/libpipewire-module-spa-monitor.so
+/usr/lib64/pipewire-0.2/libpipewire-module-spa-node-factory.so
+/usr/lib64/pipewire-0.2/libpipewire-module-spa-node.so
+/usr/lib64/pipewire-0.2/libpipewire-module-suspend-on-idle.so
+/usr/lib64/spa/alsa/libspa-alsa.so
+/usr/lib64/spa/audiomixer/libspa-audiomixer.so
+/usr/lib64/spa/audiotestsrc/libspa-audiotestsrc.so
+/usr/lib64/spa/bluez5/libspa-bluez5.so
+/usr/lib64/spa/support/libspa-dbus.so
+/usr/lib64/spa/support/libspa-support.so
+/usr/lib64/spa/test/libspa-test.so
+/usr/lib64/spa/v4l2/libspa-v4l2.so
+/usr/lib64/spa/videotestsrc/libspa-videotestsrc.so
+/usr/lib64/spa/volume/libspa-volume.so
 
 %files services
 %defattr(-,root,root,-)

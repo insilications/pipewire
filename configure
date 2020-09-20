@@ -1,1 +1,1 @@
--Dvulkan=true -Ddefault_library=both
+-Dvulkan=true -Ddefault_library=shared

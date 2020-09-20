@@ -13,3 +13,5 @@ sbc
 sndfile
 systemd
 vulkan
+x11
+libva

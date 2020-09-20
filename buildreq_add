@@ -13,3 +13,4 @@ libsndfile-staticdev
 sbc-dev
 Vulkan-Headers-dev
 Vulkan-Loader-dev
+libva-dev
