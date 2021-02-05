@@ -1,1 +1,5 @@
+-Dbluez5-backend-ofono=false
+-Dinstalled_tests=true
+-Dpipewire-jack=false
+-Dudevrulesdir="/usr/lib/udev/rules.d"
 -Dvulkan=false
