@@ -2,6 +2,9 @@ libpipewire-0.3.so.0:pw_buffers_clear
 libpipewire-0.3.so.0:pw_buffers_negotiate
 libpipewire-0.3.so.0:pw_client_info_free
 libpipewire-0.3.so.0:pw_client_info_update
+libpipewire-0.3.so.0:pw_conf_load_conf
+libpipewire-0.3.so.0:pw_conf_load_state
+libpipewire-0.3.so.0:pw_conf_save_state
 libpipewire-0.3.so.0:pw_context_add_listener
 libpipewire-0.3.so.0:pw_context_add_spa_lib
 libpipewire-0.3.so.0:pw_context_connect
@@ -21,6 +24,7 @@ libpipewire-0.3.so.0:pw_context_find_global
 libpipewire-0.3.so.0:pw_context_find_protocol
 libpipewire-0.3.so.0:pw_context_find_spa_lib
 libpipewire-0.3.so.0:pw_context_for_each_global
+libpipewire-0.3.so.0:pw_context_get_conf_section
 libpipewire-0.3.so.0:pw_context_get_default_core
 libpipewire-0.3.so.0:pw_context_get_main_loop
 libpipewire-0.3.so.0:pw_context_get_object
@@ -30,6 +34,7 @@ libpipewire-0.3.so.0:pw_context_get_user_data
 libpipewire-0.3.so.0:pw_context_load_module
 libpipewire-0.3.so.0:pw_context_load_spa_handle
 libpipewire-0.3.so.0:pw_context_new
+libpipewire-0.3.so.0:pw_context_parse_conf_section
 libpipewire-0.3.so.0:pw_context_register_export_type
 libpipewire-0.3.so.0:pw_context_set_object
 libpipewire-0.3.so.0:pw_context_update_properties
