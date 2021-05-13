@@ -4,7 +4,7 @@
 #
 Name     : pipewire
 Version  : 0.3.27
-Release  : 18
+Release  : 19
 URL      : https://github.com/PipeWire/pipewire/archive/0.3.27/pipewire-0.3.27.tar.gz
 Source0  : https://github.com/PipeWire/pipewire/archive/0.3.27/pipewire-0.3.27.tar.gz
 Summary  : No detailed summary available
@@ -134,7 +134,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620319715
+export SOURCE_DATE_EPOCH=1620929729
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -424,7 +424,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-node.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-native.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-pulse.so
-/usr/lib64/haswell/pipewire-0.3/libpipewire-module-session-manager.so
 /usr/lib64/haswell/spa-0.2/alsa/libspa-alsa.so
 /usr/lib64/haswell/spa-0.2/audioconvert/libspa-audioconvert.so
 /usr/lib64/haswell/spa-0.2/audiomixer/libspa-audiomixer.so
