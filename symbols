@@ -266,6 +266,7 @@ libpipewire-0.3.so.0:pw_properties_iterate
 libpipewire-0.3.so.0:pw_properties_new
 libpipewire-0.3.so.0:pw_properties_new_dict
 libpipewire-0.3.so.0:pw_properties_new_string
+libpipewire-0.3.so.0:pw_properties_serialize_dict
 libpipewire-0.3.so.0:pw_properties_set
 libpipewire-0.3.so.0:pw_properties_setf
 libpipewire-0.3.so.0:pw_properties_setva

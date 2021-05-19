@@ -1,5 +1,7 @@
 libSDL2-2.0.so.0
 libasound.so.2
+libavahi-client.so.3
+libavahi-common.so.3
 libbluetooth.so.3
 libc.so.6
 libdbus-1.so.3
@@ -16,6 +18,7 @@ libjack.so.0
 libm.so.6
 libncursesw.so.6
 libpthread.so.0
+libpulse.so.0
 libsbc.so.1
 libsndfile.so.1
 libsystemd.so.0
