@@ -1,5 +1,6 @@
 libpipewire-0.3.so.0:pw_buffers_clear
 libpipewire-0.3.so.0:pw_buffers_negotiate
+libpipewire-0.3.so.0:pw_check_option
 libpipewire-0.3.so.0:pw_client_info_free
 libpipewire-0.3.so.0:pw_client_info_update
 libpipewire-0.3.so.0:pw_conf_load_conf
