@@ -24,3 +24,4 @@ libsndfile.so.1
 libsystemd.so.0
 libtinfow.so.6
 libudev.so.1
+libusb-1.0.so.0
