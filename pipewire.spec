@@ -4,7 +4,7 @@
 #
 Name     : pipewire
 Version  : 0.3.31
-Release  : 23
+Release  : 24
 URL      : https://github.com/PipeWire/pipewire/archive/0.3.31/pipewire-0.3.31.tar.gz
 Source0  : https://github.com/PipeWire/pipewire/archive/0.3.31/pipewire-0.3.31.tar.gz
 Summary  : No detailed summary available
@@ -140,7 +140,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1624902899
+export SOURCE_DATE_EPOCH=1626716142
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -447,20 +447,31 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/alsa-lib/libasound_module_ctl_pipewire.so
 /usr/lib64/alsa-lib/libasound_module_pcm_pipewire.so
 /usr/lib64/gstreamer-1.0/libgstpipewire.so
+/usr/lib64/haswell/alsa-lib/libasound_module_ctl_pipewire.so
+/usr/lib64/haswell/gstreamer-1.0/libgstpipewire.so
 /usr/lib64/haswell/libpipewire-0.3.so.0
 /usr/lib64/haswell/libpipewire-0.3.so.0.331.0
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-device.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-node.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-echo-cancel.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-filter-chain.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-loopback.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-metadata.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-native.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-pulse.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-pulse-tunnel.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-session-manager.so
 /usr/lib64/haswell/spa-0.2/alsa/libspa-alsa.so
 /usr/lib64/haswell/spa-0.2/audioconvert/libspa-audioconvert.so
 /usr/lib64/haswell/spa-0.2/audiomixer/libspa-audiomixer.so
 /usr/lib64/haswell/spa-0.2/audiotestsrc/libspa-audiotestsrc.so
 /usr/lib64/haswell/spa-0.2/bluez5/libspa-bluez5.so
+/usr/lib64/haswell/spa-0.2/control/libspa-control.so
 /usr/lib64/haswell/spa-0.2/jack/libspa-jack.so
 /usr/lib64/haswell/spa-0.2/support/libspa-support.so
 /usr/lib64/haswell/spa-0.2/v4l2/libspa-v4l2.so
+/usr/lib64/haswell/spa-0.2/videoconvert/libspa-videoconvert.so
+/usr/lib64/haswell/spa-0.2/videotestsrc/libspa-videotestsrc.so
 /usr/lib64/haswell/spa-0.2/volume/libspa-volume.so
 /usr/lib64/libpipewire-0.3.so.0
 /usr/lib64/libpipewire-0.3.so.0.331.0
