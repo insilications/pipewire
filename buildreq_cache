@@ -1,4 +1,4 @@
-0.3.31
+0.3.32
 libcap-dev
 libusb-dev
 pkgconfig(avahi-client)
