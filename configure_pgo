@@ -13,7 +13,6 @@
 -Dlibusb=disabled
 -Droc=disabled
 -Ddocs=disabled
--Dexamples=disabled
 -Ddefault_library=both
 -Dman=enabled
 -Dudev=enabled
@@ -29,10 +28,12 @@
 -Dsystemd-user-service=enabled
 -Dcontrol=enabled
 -Dsupport=enabled
+-Dlibcamera=disabled
 -Dvolume=enabled
 -Dsdl2=enabled
 -Dsndfile=enabled
 -Dlibpulse=enabled
+-Dexamples=enabled
 -Dsession-managers=media-session
 -Ddefault-session-manager=media-session
 -Dtests=disabled

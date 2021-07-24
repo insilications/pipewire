@@ -13,7 +13,6 @@
 -Dlibusb=disabled
 -Droc=disabled
 -Ddocs=disabled
--Dexamples=disabled
 -Ddefault_library=both
 -Dman=enabled
 -Dudev=enabled
@@ -34,6 +33,7 @@
 -Dsdl2=enabled
 -Dsndfile=enabled
 -Dlibpulse=enabled
+-Dexamples=enabled
 -Dsession-managers=media-session
 -Ddefault-session-manager=media-session
 -Dtests=enabled

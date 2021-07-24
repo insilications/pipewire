@@ -169,7 +169,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1627153313
+export SOURCE_DATE_EPOCH=1627153990
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -267,12 +267,13 @@ meson --libdir=lib64 --prefix=/usr --buildtype=release -Ddefault_library=both -D
 -Dlibusb=disabled \
 -Droc=disabled \
 -Ddocs=disabled \
--Dexamples=disabled \
 -Ddefault_library=both \
 -Dman=enabled \
 -Dudev=enabled \
 -Dudevrulesdir="/usr/lib/udev/rules.d" \
 -Dspa-plugins=enabled \
+-Dpw-cat=enabled \
+-Dpipewire-alsa=enabled \
 -Dalsa=enabled \
 -Daudiomixer=enabled \
 -Daudioconvert=enabled \
@@ -286,6 +287,7 @@ meson --libdir=lib64 --prefix=/usr --buildtype=release -Ddefault_library=both -D
 -Dsdl2=enabled \
 -Dsndfile=enabled \
 -Dlibpulse=enabled \
+-Dexamples=enabled \
 -Dsession-managers=media-session \
 -Ddefault-session-manager=media-session \
 -Dtests=enabled \
@@ -315,12 +317,13 @@ meson --libdir=lib64 --prefix=/usr --buildtype=release -Ddefault_library=both -D
 -Dlibusb=disabled \
 -Droc=disabled \
 -Ddocs=disabled \
--Dexamples=disabled \
 -Ddefault_library=both \
 -Dman=enabled \
 -Dudev=enabled \
 -Dudevrulesdir="/usr/lib/udev/rules.d" \
 -Dspa-plugins=enabled \
+-Dpw-cat=enabled \
+-Dpipewire-alsa=enabled \
 -Dalsa=enabled \
 -Daudiomixer=enabled \
 -Daudioconvert=enabled \
@@ -334,6 +337,7 @@ meson --libdir=lib64 --prefix=/usr --buildtype=release -Ddefault_library=both -D
 -Dsdl2=enabled \
 -Dsndfile=enabled \
 -Dlibpulse=enabled \
+-Dexamples=enabled \
 -Dsession-managers=media-session \
 -Ddefault-session-manager=media-session \
 -Dtests=disabled \
@@ -351,6 +355,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/pipewire
+/usr/bin/pipewire-media-session
 /usr/bin/pipewire-pulse
 /usr/bin/pw-cat
 /usr/bin/pw-cli
@@ -366,6 +371,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/bin/pw-play
 /usr/bin/pw-profiler
 /usr/bin/pw-record
+/usr/bin/pw-reserve
 /usr/bin/pw-top
 /usr/bin/spa-acp-tool
 /usr/bin/spa-inspect
