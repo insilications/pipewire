@@ -1,0 +1,6 @@
+install -dm 0755 %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/*.so* %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/alsa-lib %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/gstreamer-1.0 %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/pipewire-0.3 %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :

@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.32
-Release  : 25
+Release  : 28
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.32.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.32.tar.gz
 Summary  : No detailed summary available
@@ -27,12 +27,15 @@ BuildRequires : alsa-tools-dev
 BuildRequires : alsa-ucm-conf
 BuildRequires : alsa-utils
 BuildRequires : buildreq-meson
+BuildRequires : cmake
+BuildRequires : cmake-dev
 BuildRequires : doxygen
 BuildRequires : findutils
 BuildRequires : flac-dev
 BuildRequires : flac-staticdev
 BuildRequires : graphviz
 BuildRequires : libcap-dev
+BuildRequires : libcap-ng-dev
 BuildRequires : libcap-staticdev
 BuildRequires : libfdk_aac-dev
 BuildRequires : libfdk_aac-staticdev
@@ -169,7 +172,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1627153990
+export SOURCE_DATE_EPOCH=1627158816
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -214,9 +217,9 @@ export CCACHE_BASEDIR=/builddir/build/BUILD
 #export CCACHE_DEBUG=true
 #export CCACHE_NODIRECT=true
 #
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 #
-export LIBRARY_PATH="$LIBRARY_PATH:/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 #
 export PATH="$PATH:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
 #
@@ -348,6 +351,14 @@ ninja --verbose %{?_smp_mflags} -v -C builddir
 %install
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang pipewire
+## install_append content
+install -dm 0755 %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/*.so* %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/alsa-lib %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/gstreamer-1.0 %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/pipewire-0.3 %{buildroot}/usr/lib64/haswell/ || :
+cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -610,10 +621,40 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/include/spa-0.2/spa/utils/string.h
 /usr/include/spa-0.2/spa/utils/type-info.h
 /usr/include/spa-0.2/spa/utils/type.h
+/usr/lib64/pkgconfig/libpipewire-0.3.pc
+/usr/lib64/pkgconfig/libspa-0.2.pc
+
+%files lib
+%defattr(-,root,root,-)
 /usr/lib64/alsa-lib/libasound_module_ctl_pipewire.so
 /usr/lib64/alsa-lib/libasound_module_pcm_pipewire.so
 /usr/lib64/gstreamer-1.0/libgstpipewire.so
+/usr/lib64/haswell/alsa-lib/libasound_module_ctl_pipewire.so
+/usr/lib64/haswell/gstreamer-1.0/libgstpipewire.so
+/usr/lib64/haswell/libpipewire-0.3.so
+/usr/lib64/haswell/libpipewire-0.3.so.0
+/usr/lib64/haswell/libpipewire-0.3.so.0.332.0
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-device.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-node.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-echo-cancel.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-filter-chain.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-loopback.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-metadata.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-native.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-pulse.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-simple.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-pulse-tunnel.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-session-manager.so
+/usr/lib64/haswell/spa-0.2/alsa/libspa-alsa.so
+/usr/lib64/haswell/spa-0.2/audioconvert/libspa-audioconvert.so
+/usr/lib64/haswell/spa-0.2/audiomixer/libspa-audiomixer.so
+/usr/lib64/haswell/spa-0.2/control/libspa-control.so
+/usr/lib64/haswell/spa-0.2/jack/libspa-jack.so
+/usr/lib64/haswell/spa-0.2/support/libspa-support.so
+/usr/lib64/haswell/spa-0.2/volume/libspa-volume.so
 /usr/lib64/libpipewire-0.3.so
+/usr/lib64/libpipewire-0.3.so.0
+/usr/lib64/libpipewire-0.3.so.0.332.0
 /usr/lib64/pipewire-0.3/libpipewire-module-access.so
 /usr/lib64/pipewire-0.3/libpipewire-module-adapter.so
 /usr/lib64/pipewire-0.3/libpipewire-module-client-device.so
@@ -636,8 +677,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/pipewire-0.3/libpipewire-module-spa-device.so
 /usr/lib64/pipewire-0.3/libpipewire-module-spa-node-factory.so
 /usr/lib64/pipewire-0.3/libpipewire-module-spa-node.so
-/usr/lib64/pkgconfig/libpipewire-0.3.pc
-/usr/lib64/pkgconfig/libspa-0.2.pc
 /usr/lib64/spa-0.2/alsa/libspa-alsa.so
 /usr/lib64/spa-0.2/audioconvert/libspa-audioconvert.so
 /usr/lib64/spa-0.2/audiomixer/libspa-audiomixer.so
@@ -647,11 +686,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/lib64/spa-0.2/support/libspa-journal.so
 /usr/lib64/spa-0.2/support/libspa-support.so
 /usr/lib64/spa-0.2/volume/libspa-volume.so
-
-%files lib
-%defattr(-,root,root,-)
-/usr/lib64/libpipewire-0.3.so.0
-/usr/lib64/libpipewire-0.3.so.0.332.0
 
 %files man
 %defattr(0644,root,root,0755)
