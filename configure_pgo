@@ -31,6 +31,6 @@
 -Dsdl2=enabled
 -Dsndfile=enabled
 -Dlibpulse=enabled
--Dtests=enabled
--Dtest=enabled
--Daudiotestsrc=enabled
+-Dtests=disabled
+-Dtest=disabled
+-Daudiotestsrc=disabled

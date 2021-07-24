@@ -1,12 +1,7 @@
-libSDL2-2.0.so.0
 libasound.so.2
-libavahi-client.so.3
-libavahi-common.so.3
-libbluetooth.so.3
 libc.so.6
 libdbus-1.so.3
 libdl.so.2
-libgcc_s.so.1
 libglib-2.0.so.0
 libgobject-2.0.so.0
 libgstallocators-1.0.so.0
@@ -19,9 +14,7 @@ libm.so.6
 libncursesw.so.6
 libpthread.so.0
 libpulse.so.0
-libsbc.so.1
 libsndfile.so.1
 libsystemd.so.0
 libtinfow.so.6
 libudev.so.1
-libusb-1.0.so.0
