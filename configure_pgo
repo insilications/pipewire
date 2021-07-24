@@ -19,6 +19,8 @@
 -Dudev=enabled
 -Dudevrulesdir="/usr/lib/udev/rules.d"
 -Dspa-plugins=enabled
+-Dpw-cat=enabled
+-Dpipewire-alsa=enabled
 -Dalsa=enabled
 -Daudiomixer=enabled
 -Daudioconvert=enabled
@@ -27,7 +29,6 @@
 -Dsystemd-user-service=enabled
 -Dcontrol=enabled
 -Dsupport=enabled
--Dlibcamera=disabled
 -Dvolume=enabled
 -Dsdl2=enabled
 -Dsndfile=enabled
