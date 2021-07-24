@@ -11,6 +11,7 @@
 -Devl=disabled
 -Davahi=disabled
 -Dlibusb=disabled
+-Droc=disabled
 -Ddocs=disabled
 -Dexamples=disabled
 -Ddefault_library=both
@@ -31,6 +32,8 @@
 -Dsdl2=enabled
 -Dsndfile=enabled
 -Dlibpulse=enabled
+-Dsession-managers=media-session
+-Ddefault-session-manager=media-session
 -Dtests=disabled
 -Dtest=disabled
 -Daudiotestsrc=disabled
