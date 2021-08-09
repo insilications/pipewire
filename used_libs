@@ -1,7 +1,6 @@
 libasound.so.2
 libc.so.6
 libdbus-1.so.3
-libdl.so.2
 libglib-2.0.so.0
 libgobject-2.0.so.0
 libgstallocators-1.0.so.0
@@ -12,7 +11,6 @@ libgstvideo-1.0.so.0
 libjack.so.0
 libm.so.6
 libncursesw.so.6
-libpthread.so.0
 libpulse.so.0
 libsndfile.so.1
 libsystemd.so.0
