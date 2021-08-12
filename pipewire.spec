@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.33
-Release  : 31
+Release  : 32
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.33.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.33.tar.gz
 Summary  : No detailed summary available
@@ -173,7 +173,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628501347
+export SOURCE_DATE_EPOCH=1628748234
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
