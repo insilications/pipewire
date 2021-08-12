@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.33
-Release  : 32
+Release  : 33
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.33.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.33.tar.gz
 Summary  : No detailed summary available
@@ -173,7 +173,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628748234
+export SOURCE_DATE_EPOCH=1628810852
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -480,6 +480,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/share/pipewire/client-rt.conf
 /usr/share/pipewire/client.conf
 /usr/share/pipewire/filter-chain/demonic.conf
+/usr/share/pipewire/filter-chain/sink-convolver.conf
 /usr/share/pipewire/filter-chain/sink-dolby-surround.conf
 /usr/share/pipewire/filter-chain/sink-eq6.conf
 /usr/share/pipewire/filter-chain/sink-matrix-spatialiser.conf
