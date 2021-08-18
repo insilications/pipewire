@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.33
-Release  : 33
+Release  : 34
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.33.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.33.tar.gz
 Summary  : No detailed summary available
@@ -27,6 +27,7 @@ BuildRequires : alsa-tools-dev
 BuildRequires : alsa-ucm-conf
 BuildRequires : alsa-utils
 BuildRequires : buildreq-meson
+BuildRequires : clr-avx-tools
 BuildRequires : cmake
 BuildRequires : cmake-dev
 BuildRequires : doxygen
@@ -42,6 +43,7 @@ BuildRequires : libfdk_aac-staticdev
 BuildRequires : libogg-dev
 BuildRequires : libogg-staticdev
 BuildRequires : libsndfile-dev
+BuildRequires : libsndfile-staticdev
 BuildRequires : libusb-dev
 BuildRequires : libvorbis-dev
 BuildRequires : libvorbis-staticdev
@@ -173,11 +175,11 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1628810852
+export SOURCE_DATE_EPOCH=1629316176
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
-export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=atomic -fprofile-arcs -ftest-coverage --coverage -fprofile-partial-training"
+export PGO_GEN="-fprofile-generate=/var/tmp/pgo -fprofile-dir=/var/tmp/pgo -fprofile-abs-path -fprofile-update=prefer-atomic -fprofile-arcs -ftest-coverage --coverage -fprofile-partial-training"
 export CFLAGS_GENERATE="-Ofast -Wl,--as-needed --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -Wp,-D_REENTRANT -pipe -ffat-lto-objects -flto=16 -fPIC -fomit-frame-pointer -Wl,--build-id=sha1 -fdevirtualize-at-ltrans -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -Wl,-sort-common -fasynchronous-unwind-tables -static-libstdc++ -static-libgcc -fexceptions -Wl,--enable-new-dtags -lgcov $PGO_GEN"
 export FCFLAGS_GENERATE="-Ofast -Wl,--as-needed --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -Wp,-D_REENTRANT -pipe -ffat-lto-objects -flto=16 -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1 -fdevirtualize-at-ltrans -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -Wl,-sort-common -fasynchronous-unwind-tables -fexceptions -Wl,--enable-new-dtags -lgcov $PGO_GEN"
 export FFLAGS_GENERATE="-Ofast -Wl,--as-needed --param=lto-max-streaming-parallelism=16 -march=native -mtune=native -mprefer-vector-width=256 -falign-functions=32 -flimit-function-alignment -fno-semantic-interposition -Wl,-Bsymbolic-functions -fno-stack-protector -fuse-ld=bfd -fuse-linker-plugin -malign-data=cacheline -mtls-dialect=gnu2 -fno-math-errno -fno-trapping-math -Wp,-D_REENTRANT -pipe -ffat-lto-objects -flto=16 -fPIC -fomit-frame-pointer -static-libstdc++ -static-libgcc -Wl,--build-id=sha1 -fdevirtualize-at-ltrans -Wl,-z,now,-z,relro,-z,max-page-size=0x1000,-z,separate-code -Wno-error -Wl,-sort-common -fasynchronous-unwind-tables -fexceptions -Wl,--enable-new-dtags -lgcov $PGO_GEN"
@@ -302,7 +304,13 @@ meson --libdir=lib64 --prefix=/usr --buildtype=release -Ddefault_library=both  -
 -Daudiotestsrc=enabled builddir
 ninja --verbose %{?_smp_mflags} -v -C builddir
 
+## profile_payload start
+unset LD_LIBRARY_PATH
+unset LIBRARY_PATH
 meson test --verbose --num-processes 1 -C builddir || :
+export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
+## profile_payload end
 find builddir/ -type f,l -not -name '*.gcno' -not -name 'statuspgo*' -delete -print  || :
 echo USED > statuspgo
 fi
@@ -641,26 +649,34 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib64/alsa-lib/libasound_module_pcm_pipewire.so
 /usr/lib64/gstreamer-1.0/libgstpipewire.so
 /usr/lib64/haswell/alsa-lib/libasound_module_ctl_pipewire.so
+/usr/lib64/haswell/alsa-lib/libasound_module_pcm_pipewire.so
 /usr/lib64/haswell/gstreamer-1.0/libgstpipewire.so
 /usr/lib64/haswell/libpipewire-0.3.so
 /usr/lib64/haswell/libpipewire-0.3.so.0
 /usr/lib64/haswell/libpipewire-0.3.so.0.333.0
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-access.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-adapter.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-device.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-node.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-echo-cancel.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-filter-chain.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-link-factory.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-loopback.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-metadata.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-profiler.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-native.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-pulse.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-protocol-simple.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-pulse-tunnel.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-session-manager.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-spa-node-factory.so
+/usr/lib64/haswell/pipewire-0.3/libpipewire-module-spa-node.so
 /usr/lib64/haswell/spa-0.2/alsa/libspa-alsa.so
 /usr/lib64/haswell/spa-0.2/audioconvert/libspa-audioconvert.so
 /usr/lib64/haswell/spa-0.2/audiomixer/libspa-audiomixer.so
 /usr/lib64/haswell/spa-0.2/control/libspa-control.so
 /usr/lib64/haswell/spa-0.2/jack/libspa-jack.so
+/usr/lib64/haswell/spa-0.2/support/libspa-dbus.so
 /usr/lib64/haswell/spa-0.2/support/libspa-support.so
 /usr/lib64/haswell/spa-0.2/volume/libspa-volume.so
 /usr/lib64/libpipewire-0.3.so
