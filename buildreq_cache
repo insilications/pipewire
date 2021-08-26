@@ -1,8 +1,7 @@
-0.3.33
+0.3.34
 libcap-dev
 libusb-dev
 pkgconfig(avahi-client)
 pkgconfig(libcap)
-pkgconfig(libfreeaptx)
 pkgconfig(libusb-1.0)
 valgrind
