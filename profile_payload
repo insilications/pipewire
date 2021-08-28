@@ -1,3 +1,4 @@
+exit
 export DISPLAY=:0
 export __GL_SYNC_TO_VBLANK=0
 export __GL_SYNC_DISPLAY_DEVICE=DFP-1
@@ -22,4 +23,10 @@ export LIBVA_DRIVERS_PATH=/usr/lib64/dri
 export GTK_RC_FILES=/etc/gtk/gtkrc
 export FONTCONFIG_PATH=/usr/share/defaults/fonts
 export $(dbus-launch)
+pushd builddir/src/examples
+timeout 5s ./audio-src
+timeout 3s ./audio-dsp-filter
+timeout 3s ./audio-dsp-src
+timeout 3s ./pipewire-media-session
+popd
 meson test --verbose --num-processes 1 -C builddir || :
