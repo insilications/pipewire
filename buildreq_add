@@ -11,6 +11,7 @@ alsa-utils
 clr-avx-tools
 cmake
 cmake-dev
+docutils
 doxygen
 findutils
 flac-dev
