@@ -35,7 +35,6 @@
 -Dlibpulse=enabled
 -Dexamples=enabled
 -Dsession-managers=media-session
--Ddefault-session-manager=media-session
 -Dtests=disabled
 -Dtest=disabled
 -Daudiotestsrc=disabled
