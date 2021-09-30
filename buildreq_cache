@@ -1,8 +1,10 @@
-0.3.37
+0.3.38
 docutils
 libcap-dev
 libusb-dev
 pkgconfig(avahi-client)
 pkgconfig(libcap)
 pkgconfig(libusb-1.0)
+pkgconfig(readline)
+readline-dev
 valgrind

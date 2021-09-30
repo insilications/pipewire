@@ -1,3 +1,4 @@
+libpipewire-0.3.so.0:_pw_log_topic_new
 libpipewire-0.3.so.0:pw_buffers_clear
 libpipewire-0.3.so.0:pw_buffers_negotiate
 libpipewire-0.3.so.0:pw_check_option
@@ -243,6 +244,8 @@ libpipewire-0.3.so.0:pw_link_state_as_string
 libpipewire-0.3.so.0:pw_load_spa_handle
 libpipewire-0.3.so.0:pw_log_get
 libpipewire-0.3.so.0:pw_log_log
+libpipewire-0.3.so.0:pw_log_logt
+libpipewire-0.3.so.0:pw_log_logtv
 libpipewire-0.3.so.0:pw_log_logv
 libpipewire-0.3.so.0:pw_log_set
 libpipewire-0.3.so.0:pw_log_set_level
