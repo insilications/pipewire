@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : pipewire
-Version  : 0.3.34
-Release  : 310
-URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.34.tar.gz
-Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.34.tar.gz
+Version  : 0.3.40
+Release  : 551
+URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.40.tar.gz
+Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.40.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -19,7 +19,6 @@ Requires: pipewire-locales = %{version}-%{release}
 Requires: pipewire-man = %{version}-%{release}
 Requires: pipewire-services = %{version}-%{release}
 BuildRequires : SDL2-dev
-BuildRequires : SDL2-staticdev
 BuildRequires : alsa-lib-dev
 BuildRequires : alsa-plugins
 BuildRequires : alsa-tools
@@ -33,20 +32,13 @@ BuildRequires : docutils
 BuildRequires : doxygen
 BuildRequires : findutils
 BuildRequires : flac-dev
-BuildRequires : flac-staticdev
 BuildRequires : graphviz
 BuildRequires : libcap-dev
 BuildRequires : libcap-ng-dev
-BuildRequires : libcap-staticdev
-BuildRequires : libfdk_aac-dev
-BuildRequires : libfdk_aac-staticdev
 BuildRequires : libogg-dev
-BuildRequires : libogg-staticdev
 BuildRequires : libsndfile-dev
-BuildRequires : libsndfile-staticdev
 BuildRequires : libusb-dev
 BuildRequires : libvorbis-dev
-BuildRequires : libvorbis-staticdev
 BuildRequires : octave-dev
 BuildRequires : opus
 BuildRequires : opus-dev
@@ -54,8 +46,6 @@ BuildRequires : opus-lib
 BuildRequires : perl
 BuildRequires : perl(XML::Parser)
 BuildRequires : perl-XML-Parser
-BuildRequires : pipewire
-BuildRequires : pipewire-dev
 BuildRequires : pkg-config
 BuildRequires : pkg-config-dev
 BuildRequires : pkgconfig(alsa)
@@ -80,11 +70,8 @@ BuildRequires : python3
 BuildRequires : python3-dev
 BuildRequires : python3-staticdev
 BuildRequires : rtkit
-BuildRequires : speex-dev
-BuildRequires : speex-staticdev
 BuildRequires : sqlite-autoconf-dev
 BuildRequires : valgrind
-BuildRequires : xmltoman
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -177,7 +164,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631088946
+export SOURCE_DATE_EPOCH=1638013719
 export GCC_IGNORE_WERROR=1
 ## altflags_pgof content
 ## pgo generate
@@ -234,9 +221,9 @@ export PATH="/usr/lib64/ccache/bin:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/
 export CPATH="/usr/local/cuda/include"
 #
 export DISPLAY=:0
-export __GL_SYNC_TO_VBLANK=0
-export __GL_SYNC_DISPLAY_DEVICE=DFP-1
-export VDPAU_NVIDIA_SYNC_DISPLAY_DEVICE=DFP-1
+export __GL_SYNC_TO_VBLANK=1
+export __GL_SYNC_DISPLAY_DEVICE=HDMI-0
+export VDPAU_NVIDIA_SYNC_DISPLAY_DEVICE=HDMI-0
 export LANG=en_US.UTF-8
 export XDG_CONFIG_DIRS=/usr/share/xdg:/etc/xdg
 export XDG_SEAT=seat0
@@ -401,6 +388,7 @@ fi
 
 %install
 DESTDIR=%{buildroot} ninja -C builddir install
+%find_lang media-session
 %find_lang pipewire
 ## install_append content
 install -dm 0755 %{buildroot}/usr/lib64/haswell/ || :
@@ -420,8 +408,8 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/bin/pipewire-media-session
 /usr/bin/pipewire-pulse
 /usr/bin/pw-cat
-/usr/bin/pw-cli
 /usr/bin/pw-dot
+/usr/bin/pw-dsdplay
 /usr/bin/pw-dump
 /usr/bin/pw-link
 /usr/bin/pw-loopback
@@ -435,6 +423,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/bin/pw-record
 /usr/bin/pw-reserve
 /usr/bin/pw-top
+/usr/bin/pw-v4l2
 /usr/bin/spa-acp-tool
 /usr/bin/spa-inspect
 /usr/bin/spa-json-dump
@@ -529,7 +518,6 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/share/pipewire/filter-chain/source-rnnoise.conf
 /usr/share/pipewire/jack.conf
 /usr/share/pipewire/media-session.d/alsa-monitor.conf
-/usr/share/pipewire/media-session.d/bluez-hardware.conf
 /usr/share/pipewire/media-session.d/bluez-monitor.conf
 /usr/share/pipewire/media-session.d/media-session.conf
 /usr/share/pipewire/media-session.d/v4l2-monitor.conf
@@ -621,6 +609,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/include/spa-0.2/spa/node/node.h
 /usr/include/spa-0.2/spa/node/type-info.h
 /usr/include/spa-0.2/spa/node/utils.h
+/usr/include/spa-0.2/spa/param/audio/dsd.h
 /usr/include/spa-0.2/spa/param/audio/format-utils.h
 /usr/include/spa-0.2/spa/param/audio/format.h
 /usr/include/spa-0.2/spa/param/audio/iec958.h
@@ -689,7 +678,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib64/haswell/gstreamer-1.0/libgstpipewire.so
 /usr/lib64/haswell/libpipewire-0.3.so
 /usr/lib64/haswell/libpipewire-0.3.so.0
-/usr/lib64/haswell/libpipewire-0.3.so.0.334.0
+/usr/lib64/haswell/libpipewire-0.3.so.0.340.0
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-access.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-adapter.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-client-device.so
@@ -707,17 +696,19 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-session-manager.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-spa-node-factory.so
 /usr/lib64/haswell/pipewire-0.3/libpipewire-module-spa-node.so
+/usr/lib64/haswell/pipewire-0.3/v4l2/libpw-v4l2.so
 /usr/lib64/haswell/spa-0.2/alsa/libspa-alsa.so
 /usr/lib64/haswell/spa-0.2/audioconvert/libspa-audioconvert.so
 /usr/lib64/haswell/spa-0.2/audiomixer/libspa-audiomixer.so
 /usr/lib64/haswell/spa-0.2/control/libspa-control.so
 /usr/lib64/haswell/spa-0.2/jack/libspa-jack.so
 /usr/lib64/haswell/spa-0.2/support/libspa-dbus.so
+/usr/lib64/haswell/spa-0.2/support/libspa-journal.so
 /usr/lib64/haswell/spa-0.2/support/libspa-support.so
 /usr/lib64/haswell/spa-0.2/volume/libspa-volume.so
 /usr/lib64/libpipewire-0.3.so
 /usr/lib64/libpipewire-0.3.so.0
-/usr/lib64/libpipewire-0.3.so.0.334.0
+/usr/lib64/libpipewire-0.3.so.0.340.0
 /usr/lib64/pipewire-0.3/libpipewire-module-access.so
 /usr/lib64/pipewire-0.3/libpipewire-module-adapter.so
 /usr/lib64/pipewire-0.3/libpipewire-module-client-device.so
@@ -740,6 +731,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib64/pipewire-0.3/libpipewire-module-spa-device.so
 /usr/lib64/pipewire-0.3/libpipewire-module-spa-node-factory.so
 /usr/lib64/pipewire-0.3/libpipewire-module-spa-node.so
+/usr/lib64/pipewire-0.3/v4l2/libpw-v4l2.so
 /usr/lib64/spa-0.2/alsa/libspa-alsa.so
 /usr/lib64/spa-0.2/audioconvert/libspa-audioconvert.so
 /usr/lib64/spa-0.2/audiomixer/libspa-audiomixer.so
@@ -752,6 +744,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 
 %files man
 %defattr(0644,root,root,0755)
+/usr/share/man/man1/pipewire-pulse.1
 /usr/share/man/man1/pipewire.1
 /usr/share/man/man1/pw-cat.1
 /usr/share/man/man1/pw-cli.1
@@ -764,7 +757,6 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 
 %files services
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/pipewire-media-session.service
 /usr/lib/systemd/system/pipewire.service
 /usr/lib/systemd/system/pipewire.socket
 /usr/lib/systemd/user/pipewire-media-session.service
@@ -773,5 +765,5 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib/systemd/user/pipewire.service
 /usr/lib/systemd/user/pipewire.socket
 
-%files locales -f pipewire.lang
+%files locales -f media-session.lang -f pipewire.lang
 %defattr(-,root,root,-)

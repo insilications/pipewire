@@ -1,18 +1,18 @@
 # This file contains additional pkgconfig build requirements that did
 # not get picked up automatically. One name per line, no whitespace.
 alsa
+avahi-client
 bluez
 dbus-1
 glib-2.0
 gstreamer-1.0
 gstreamer-plugins-base-1.0
 jack
+libcap
 libpulse
 libsystemd
+libusb-1.0
 ncurses
 sbc
 sndfile
 systemd
-avahi-client
-libcap
-libusb-1.0

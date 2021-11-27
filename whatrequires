@@ -1,3 +1,11 @@
 # This file contains recursive sources that require this package
+SDL2
+gnome-shell
+kwin
+mutter
+obs-studio
 pipewire-dev
 pipewire-tests
+plasma-workspace
+xdg-desktop-portal
+xdg-desktop-portal-kde
