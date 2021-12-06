@@ -1,5 +1,6 @@
 libasound.so.2
 libc.so.6
+libcrypto.so.1.1
 libdbus-1.so.3
 libglib-2.0.so.0
 libgobject-2.0.so.0
@@ -13,6 +14,7 @@ libm.so.6
 libmvec.so.1
 libncursesw.so.6
 libpulse.so.0
+libreadline.so.8
 libsndfile.so.1
 libsystemd.so.0
 libtinfow.so.6
