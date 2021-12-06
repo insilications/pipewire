@@ -32,9 +32,9 @@ export $(dbus-launch)
 # sudo cp /builddir/build/BUILD/pipewire/builddir/src/daemon/client.conf /usr/share/pipewire/client.conf
 # sudo mkdir -p /usr/share/pipewire/media-session.d
 # sudo cp /builddir/build/BUILD/pipewire/builddir/subprojects/media-session/media-session.d/media-session.conf /usr/share/pipewire/media-session.d/media-session.conf
-export SPA_PLUGIN_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/
-export PIPEWIRE_CONFIG_DIR=/builddir/build/BUILD/pipewire/builddir/src/daemon/
-export PIPEWIRE_MODULE_DIR=/builddir/build/BUILD/pipewire/builddir/src/modules/
+export SPA_PLUGIN_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins
+export PIPEWIRE_CONFIG_DIR=/builddir/build/BUILD/pipewire/builddir/src/daemon
+export PIPEWIRE_MODULE_DIR=/builddir/build/BUILD/pipewire/builddir/src/modules
 export PATH="/builddir/build/BUILD/pipewire/builddir/src/examples:/usr/lib64/ccache/bin:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
 export ACP_PATHS_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/paths
 export ACP_PROFILES_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/profile-sets
