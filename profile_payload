@@ -53,5 +53,4 @@ timeout 3s ./pipewire-media-session || :
 unset PIPEWIRE_DEBUG
 timeout 3s ./pipewire-media-session || :
 popd
-exit 1
 meson test --verbose --num-processes 1 -C builddir || :
