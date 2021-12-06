@@ -17,6 +17,7 @@ alsa-tools
 alsa-tools-dev
 alsa-ucm-conf
 alsa-utils
+libcanberra-dev
 clr-avx-tools
 cmake
 cmake-dev
