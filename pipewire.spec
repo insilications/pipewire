@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.40
-Release  : 560
+Release  : 561
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.40.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.40.tar.gz
 Summary  : No detailed summary available
@@ -89,7 +89,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1638788509
+export SOURCE_DATE_EPOCH=1638789027
 export GCC_IGNORE_WERROR=1
 ## altflags_pgof content
 ## pgo generate
@@ -230,6 +230,7 @@ export LANG=en_US.UTF-8
 export XDG_CONFIG_DIRS=/usr/share/xdg:/etc/xdg
 export XDG_SEAT=seat0
 export XDG_SESSION_TYPE=tty
+exit 1
 export XDG_CURRENT_DESKTOP=KDE
 export XDG_SESSION_CLASS=user
 export XDG_VTNR=1
@@ -249,16 +250,21 @@ export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/li
 #
 export LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib64/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/haswell/pulseaudio:/usr/lib64/haswell/alsa-lib:/usr/lib64/haswell/gstreamer-1.0:/usr/lib64/haswell/pipewire-0.3:/usr/lib64/haswell/spa-0.2:/usr/lib64/dri:/usr/lib64/chromium:/usr/lib64:/usr/lib64/pulseaudio:/usr/lib64/alsa-lib:/usr/lib64/gstreamer-1.0:/usr/lib64/pipewire-0.3:/usr/lib64/spa-0.2:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/nvidia/lib32:/usr/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 #
-export PATH="/usr/lib64/ccache/bin:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
 export $(dbus-launch)
-sudo mkdir -p /usr/lib64/spa-0.2/
-sudo cp -R /builddir/build/BUILD/pipewire/builddir/spa/plugins/* /usr/lib64/spa-0.2/
-sudo mkdir -p /usr/lib64/pipewire-0.3/
-sudo cp -R /builddir/build/BUILD/pipewire/builddir/src/modules/*.so* /usr/lib64/pipewire-0.3/
-sudo mkdir -p /usr/share/pipewire
-sudo cp /builddir/build/BUILD/pipewire/builddir/src/daemon/client.conf /usr/share/pipewire/client.conf
-sudo mkdir -p /usr/share/pipewire/media-session.d
-sudo cp /builddir/build/BUILD/pipewire/builddir/subprojects/media-session/media-session.d/media-session.conf /usr/share/pipewire/media-session.d/media-session.conf
+# sudo mkdir -p /usr/lib64/spa-0.2/
+# sudo cp -R /builddir/build/BUILD/pipewire/builddir/spa/plugins/* /usr/lib64/spa-0.2/
+# sudo mkdir -p /usr/lib64/pipewire-0.3/
+# sudo cp -R /builddir/build/BUILD/pipewire/builddir/src/modules/*.so* /usr/lib64/pipewire-0.3/
+# sudo mkdir -p /usr/share/pipewire
+# sudo cp /builddir/build/BUILD/pipewire/builddir/src/daemon/client.conf /usr/share/pipewire/client.conf
+# sudo mkdir -p /usr/share/pipewire/media-session.d
+# sudo cp /builddir/build/BUILD/pipewire/builddir/subprojects/media-session/media-session.d/media-session.conf /usr/share/pipewire/media-session.d/media-session.conf
+export SPA_PLUGIN_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/
+export PIPEWIRE_CONFIG_DIR=/builddir/build/BUILD/pipewire/builddir/src/daemon/
+export PIPEWIRE_MODULE_DIR=/builddir/build/BUILD/pipewire/builddir/src/modules/
+export PATH="/builddir/build/BUILD/pipewire/builddir/src/examples:/usr/lib64/ccache/bin:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
+export ACP_PATHS_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/paths
+export ACP_PROFILES_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/profile-sets
 pushd builddir/src/examples
 timeout 5s ./audio-src || :
 timeout 3s ./audio-dsp-filter || :
