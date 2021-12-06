@@ -33,6 +33,8 @@ sudo mkdir -p /usr/lib64/pipewire-0.3/
 sudo cp -R /builddir/build/BUILD/pipewire/builddir/src/modules/*.so* /usr/lib64/pipewire-0.3/
 sudo mkdir -p /usr/share/pipewire
 sudo cp /builddir/build/BUILD/pipewire/builddir/src/daemon/client.conf /usr/share/pipewire/client.conf
+sudo mkdir -p /usr/share/pipewire/media-session.d
+sudo cp /builddir/build/BUILD/pipewire/builddir/subprojects/media-session/media-session.d/media-session.conf /usr/share/pipewire/media-session.d/media-session.conf
 pushd builddir/src/examples
 timeout 5s ./audio-src || :
 timeout 3s ./audio-dsp-filter || :
