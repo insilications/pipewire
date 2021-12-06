@@ -13,6 +13,8 @@ libpulse
 libsystemd
 libusb-1.0
 ncurses
+openssl
+readline
 sbc
 sndfile
 systemd
