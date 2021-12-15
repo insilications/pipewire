@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.41
-Release  : 571
+Release  : 572
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.41.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.41.tar.gz
 Summary  : No detailed summary available
@@ -56,7 +56,6 @@ BuildRequires : pkgconfig(libcap)
 BuildRequires : pkgconfig(libpulse)
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(libusb-1.0)
-BuildRequires : pkgconfig(lilv-0)
 BuildRequires : pkgconfig(ncurses)
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(readline)
@@ -95,7 +94,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639557217
+export SOURCE_DATE_EPOCH=1639557882
 export GCC_IGNORE_WERROR=1
 ## altflags_pgof content
 ## pgo generate
@@ -189,46 +188,45 @@ export FCFLAGS="${FCFLAGS_GENERATE}"
 export LDFLAGS="${LDFLAGS_GENERATE}"
 export ASMFLAGS="${ASMFLAGS_GENERATE}"
 export LIBS="${LIBS_GENERATE}"
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Ddefault_library=both  -Dbluez5-backend-ofono=disabled \
--Dbluez5=disabled \
--Dv4l2=disabled \
--Dinstalled_tests=disabled \
--Dpipewire-jack=disabled \
--Dvulkan=disabled \
--Dlibcamera=disabled \
--Dvideoconvert=disabled \
--Dvideotestsrc=disabled \
--Dffmpeg=disabled \
--Devl=disabled \
--Davahi=disabled \
--Dlibusb=disabled \
--Droc=disabled \
--Ddocs=disabled \
--Ddefault_library=both \
--Dman=enabled \
--Dudev=enabled \
--Dudevrulesdir="/usr/lib/udev/rules.d" \
--Dspa-plugins=enabled \
--Dpw-cat=enabled \
--Dpipewire-alsa=enabled \
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Ddefault_library=both  -Ddefault_library=static \
 -Dalsa=enabled \
--Daudiomixer=enabled \
 -Daudioconvert=enabled \
--Dsystemd=enabled \
--Dsystemd-system-service=enabled \
--Dsystemd-user-service=enabled \
+-Daudiomixer=enabled \
+-Davahi=disabled \
+-Dbluez5-backend-ofono=disabled \
+-Dbluez5=disabled \
 -Dcontrol=enabled \
--Dsupport=enabled \
--Dlibcamera=disabled \
--Dvolume=enabled \
--Dsdl2=enabled \
--Dsndfile=enabled \
--Dlibpulse=enabled \
+-Ddocs=disabled \
+-Devl=disabled \
 -Dexamples=enabled \
--Dsession-managers=media-session \
+-Dffmpeg=disabled \
+-Dlibcamera=disabled \
+-Dlibpulse=enabled \
+-Dlibusb=disabled \
+-Dman=enabled \
+-Dpipewire-alsa=enabled \
+-Dpipewire-jack=disabled \
+-Dpw-cat=enabled \
+-Droc=disabled \
+-Dsdl2=enabled \
+-Dsession-managers=[] \
+-Dsndfile=enabled \
+-Dspa-plugins=enabled \
+-Dsupport=enabled \
+-Dsystemd-system-service=disable \
+-Dsystemd-user-service=enabled \
+-Dsystemd=enabled \
+-Dudevrulesdir=/usr/lib/udev/rules.d \
+-Dudev=enabled \
+-Dv4l2=disabled \
+-Dvideoconvert=disabled \
+-Dvolume=enabled \
+-Dvulkan=disabled \
+-Dvideotestsrc=disabled \
+-Daudiotestsrc=enabled \
+-Dinstalled_tests=disabled \
 -Dtests=enabled \
--Dtest=enabled \
--Daudiotestsrc=enabled builddir
+-Dtest=enabled builddir
 ninja --verbose %{?_smp_mflags} -C builddir
 
 ## profile_payload start
@@ -305,46 +303,45 @@ export FCFLAGS="${FCFLAGS_USE}"
 export LDFLAGS="${LDFLAGS_USE}"
 export ASMFLAGS="${ASMFLAGS_USE}"
 export LIBS="${LIBS_USE}"
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Ddefault_library=both -Dbluez5-backend-ofono=disabled \
--Dbluez5=disabled \
--Dv4l2=disabled \
--Dinstalled_tests=disabled \
--Dpipewire-jack=disabled \
--Dvulkan=disabled \
--Dlibcamera=disabled \
--Dvideoconvert=disabled \
--Dvideotestsrc=disabled \
--Dffmpeg=disabled \
--Devl=disabled \
--Davahi=disabled \
--Dlibusb=disabled \
--Droc=disabled \
--Ddocs=disabled \
--Ddefault_library=both \
--Dman=enabled \
--Dudev=enabled \
--Dudevrulesdir="/usr/lib/udev/rules.d" \
--Dspa-plugins=enabled \
--Dpw-cat=enabled \
--Dpipewire-alsa=enabled \
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Ddefault_library=both -Ddefault_library=static \
 -Dalsa=enabled \
--Daudiomixer=enabled \
 -Daudioconvert=enabled \
--Dsystemd=enabled \
--Dsystemd-system-service=enabled \
--Dsystemd-user-service=enabled \
+-Daudiomixer=enabled \
+-Davahi=disabled \
+-Dbluez5-backend-ofono=disabled \
+-Dbluez5=disabled \
 -Dcontrol=enabled \
--Dsupport=enabled \
--Dlibcamera=disabled \
--Dvolume=enabled \
--Dsdl2=enabled \
--Dsndfile=enabled \
--Dlibpulse=enabled \
+-Ddocs=disabled \
+-Devl=disabled \
 -Dexamples=enabled \
--Dsession-managers=media-session \
+-Dffmpeg=disabled \
+-Dlibcamera=disabled \
+-Dlibpulse=enabled \
+-Dlibusb=disabled \
+-Dman=enabled \
+-Dpipewire-alsa=enabled \
+-Dpipewire-jack=disabled \
+-Dpw-cat=enabled \
+-Droc=disabled \
+-Dsdl2=enabled \
+-Dsession-managers=[] \
+-Dsndfile=enabled \
+-Dspa-plugins=enabled \
+-Dsupport=enabled \
+-Dsystemd-system-service=disable \
+-Dsystemd-user-service=enabled \
+-Dsystemd=enabled \
+-Dudevrulesdir=/usr/lib/udev/rules.d \
+-Dudev=enabled \
+-Dv4l2=disabled \
+-Dvideoconvert=disabled \
+-Dvolume=enabled \
+-Dvulkan=disabled \
+-Dvideotestsrc=disabled \
+-Daudiotestsrc=disabled \
+-Dinstalled_tests=disabled \
 -Dtests=disabled \
--Dtest=disabled \
--Daudiotestsrc=disabled  builddir
+-Dtest=disabled  builddir
 ninja --verbose %{?_smp_mflags} -C builddir
 fi
 

@@ -23,7 +23,7 @@
 -Dsndfile=enabled
 -Dspa-plugins=enabled
 -Dsupport=enabled
--Dsystemd-system-service=disable
+-Dsystemd-system-service=disabled
 -Dsystemd-user-service=enabled
 -Dsystemd=enabled
 -Dudevrulesdir=/usr/lib/udev/rules.d
