@@ -1,4 +1,4 @@
--Ddefault_library=static
+-Ddefault_library=both
 -Dalsa=enabled
 -Daudioconvert=enabled
 -Daudiomixer=enabled
