@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.41
-Release  : 572
+Release  : 573
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.41.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.41.tar.gz
 Summary  : No detailed summary available
@@ -56,6 +56,7 @@ BuildRequires : pkgconfig(libcap)
 BuildRequires : pkgconfig(libpulse)
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(libusb-1.0)
+BuildRequires : pkgconfig(lilv-0)
 BuildRequires : pkgconfig(ncurses)
 BuildRequires : pkgconfig(openssl)
 BuildRequires : pkgconfig(readline)
@@ -94,7 +95,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639557882
+export SOURCE_DATE_EPOCH=1639558024
 export GCC_IGNORE_WERROR=1
 ## altflags_pgof content
 ## pgo generate
@@ -213,7 +214,7 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --li
 -Dsndfile=enabled \
 -Dspa-plugins=enabled \
 -Dsupport=enabled \
--Dsystemd-system-service=disable \
+-Dsystemd-system-service=disabled \
 -Dsystemd-user-service=enabled \
 -Dsystemd=enabled \
 -Dudevrulesdir=/usr/lib/udev/rules.d \
@@ -328,7 +329,7 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --li
 -Dsndfile=enabled \
 -Dspa-plugins=enabled \
 -Dsupport=enabled \
--Dsystemd-system-service=disable \
+-Dsystemd-system-service=disabled \
 -Dsystemd-user-service=enabled \
 -Dsystemd=enabled \
 -Dudevrulesdir=/usr/lib/udev/rules.d \

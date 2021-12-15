@@ -47,10 +47,10 @@ timeout 4s ./audio-src || :
 timeout 3s ./audio-dsp-filter || :
 timeout 3s ./audio-dsp-src || :
 popd
-pushd builddir/subprojects/media-session/src/
-export PIPEWIRE_DEBUG=4
-timeout 3s ./pipewire-media-session || :
-unset PIPEWIRE_DEBUG
-timeout 3s ./pipewire-media-session || :
-popd
+# pushd builddir/subprojects/media-session/src/
+# export PIPEWIRE_DEBUG=4
+# timeout 3s ./pipewire-media-session || :
+# unset PIPEWIRE_DEBUG
+# timeout 3s ./pipewire-media-session || :
+# popd
 meson test --verbose --num-processes 1 -C builddir || :
