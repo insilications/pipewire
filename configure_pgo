@@ -50,5 +50,5 @@
 -Dvideotestsrc=disabled
 -Daudiotestsrc=enabled
 -Dinstalled_tests=enabled
--Dtests=disabled
--Dtest=disabled
+-Dtests=enabled
+-Dtest=enabled
