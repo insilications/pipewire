@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.42
-Release  : 582
+Release  : 583
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.42.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.42.tar.gz
 Summary  : No detailed summary available
@@ -274,7 +274,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1639852188
+export SOURCE_DATE_EPOCH=1639852752
 export GCC_IGNORE_WERROR=1
 ## altflags_pgof content
 ## pgo generate
@@ -551,8 +551,8 @@ CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" LIBS="$LIBS" meson --li
 -Dvideotestsrc=disabled \
 -Daudiotestsrc=enabled \
 -Dinstalled_tests=enabled \
--Dtests=disabled \
--Dtest=disabled  builddir
+-Dtests=enabled \
+-Dtest=enabled  builddir
 ninja --verbose %{?_smp_mflags} -C builddir
 fi
 
@@ -860,6 +860,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib64/haswell/spa-0.2/control/libspa-control.so
 /usr/lib64/haswell/spa-0.2/support/libspa-journal.so
 /usr/lib64/haswell/spa-0.2/support/libspa-support.so
+/usr/lib64/haswell/spa-0.2/test/libspa-test.so
 /usr/lib64/haswell/spa-0.2/volume/libspa-volume.so
 /usr/lib64/libpipewire-0.3.so
 /usr/lib64/libpipewire-0.3.so.0
@@ -894,6 +895,7 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/lib64/spa-0.2/support/libspa-dbus.so
 /usr/lib64/spa-0.2/support/libspa-journal.so
 /usr/lib64/spa-0.2/support/libspa-support.so
+/usr/lib64/spa-0.2/test/libspa-test.so
 /usr/lib64/spa-0.2/volume/libspa-volume.so
 
 %files man
@@ -946,8 +948,12 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/libexec/installed-tests/pipewire-0.3/examples/video-src-alloc
 /usr/libexec/installed-tests/pipewire-0.3/examples/video-src-fixate
 /usr/libexec/installed-tests/pipewire-0.3/examples/video-src-reneg
+/usr/libexec/installed-tests/pipewire-0.3/pw-test-cpp
+/usr/libexec/installed-tests/pipewire-0.3/pw-test-endpoint
+/usr/libexec/installed-tests/pipewire-0.3/pw-test-interfaces
 /usr/libexec/installed-tests/pipewire-0.3/pw-test-pipewire-alsa-stress
 /usr/libexec/installed-tests/pipewire-0.3/pw-test-protocol-native
+/usr/libexec/installed-tests/pipewire-0.3/pw-test-stream
 /usr/libexec/installed-tests/pipewire-0.3/spa-benchmark-dict
 /usr/libexec/installed-tests/pipewire-0.3/spa-benchmark-pod
 /usr/libexec/installed-tests/pipewire-0.3/spa-stress-ringbuffer
@@ -958,8 +964,12 @@ cp --archive %{buildroot}/usr/lib64/spa-0.2 %{buildroot}/usr/lib64/haswell/ || :
 /usr/share/installed-tests/pipewire-0.3/audioconvert/test-channelmix.test
 /usr/share/installed-tests/pipewire-0.3/audioconvert/test-fmt-ops.test
 /usr/share/installed-tests/pipewire-0.3/audioconvert/test-resample.test
+/usr/share/installed-tests/pipewire-0.3/pw-test-cpp.test
+/usr/share/installed-tests/pipewire-0.3/pw-test-endpoint.test
+/usr/share/installed-tests/pipewire-0.3/pw-test-interfaces.test
 /usr/share/installed-tests/pipewire-0.3/pw-test-pipewire-alsa-stress.test
 /usr/share/installed-tests/pipewire-0.3/pw-test-protocol-native.test
+/usr/share/installed-tests/pipewire-0.3/pw-test-stream.test
 /usr/share/installed-tests/pipewire-0.3/spa-benchmark-dict.test
 /usr/share/installed-tests/pipewire-0.3/spa-benchmark-pod.test
 /usr/share/installed-tests/pipewire-0.3/spa-stress-ringbuffer.test
