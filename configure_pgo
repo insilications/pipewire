@@ -40,7 +40,7 @@
 -Dsystemd-system-service=disabled
 -Dsystemd-user-service=enabled
 -Dsystemd=enabled
--Dudevrulesdir=/usr/lib/udev/rules.d
+-Dudevrulesdir="/usr/lib/udev/rules.d"
 -Dudev=enabled
 -Dv4l2=disabled
 -Dvideoconvert=disabled
