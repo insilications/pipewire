@@ -1,5 +1,5 @@
 PKG_NAME := pipewire
-URL = https://gitlab.freedesktop.org/pipewire/pipewire.git
+URL = https://github.com/PipeWire/pipewire.git
 ARCHIVES = 
 ARCHIVES_GIT = 
 

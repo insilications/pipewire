@@ -16,7 +16,7 @@
 -Dbluez5-codec-ldac=disabled
 -Dbluez5-codec-aac=disabled
 -Ddocs=disabled
--Draop=disable
+-Draop=disabled
 -Decho-cancel-webrtc=disabled
 -Devl=disabled
 -Dexamples=enabled
