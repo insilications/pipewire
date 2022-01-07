@@ -1,12 +1,4 @@
-libpipewire-0.3.so.0:__gcov_average_profiler_atomic
-libpipewire-0.3.so.0:__gcov_dump
-libpipewire-0.3.so.0:__gcov_indirect_call_profiler_v4
-libpipewire-0.3.so.0:__gcov_indirect_call_profiler_v4_atomic
-libpipewire-0.3.so.0:__gcov_ior_profiler_atomic
-libpipewire-0.3.so.0:__gcov_reset
-libpipewire-0.3.so.0:__gcov_topn_values_profiler_atomic
 libpipewire-0.3.so.0:_pw_log_topic_new
-libpipewire-0.3.so.0:mangle_path
 libpipewire-0.3.so.0:pw_buffers_clear
 libpipewire-0.3.so.0:pw_buffers_negotiate
 libpipewire-0.3.so.0:pw_check_option
