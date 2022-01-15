@@ -126,7 +126,6 @@ libpipewire-0.3.so.0:pw_global_get_id
 libpipewire-0.3.so.0:pw_global_get_object
 libpipewire-0.3.so.0:pw_global_get_permissions
 libpipewire-0.3.so.0:pw_global_get_properties
-libpipewire-0.3.so.0:pw_global_get_serial
 libpipewire-0.3.so.0:pw_global_get_type
 libpipewire-0.3.so.0:pw_global_get_version
 libpipewire-0.3.so.0:pw_global_is_type

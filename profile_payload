@@ -5,21 +5,10 @@ export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 # export PATH="/builddir/build/BUILD/pipewire/builddir/src/examples:/usr/lib64/ccache/bin:/usr/local/cuda/bin:/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
 # export ACP_PATHS_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/paths
 # export ACP_PROFILES_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/profile-sets
-meson test --verbose --num-processes 1 -C builddir || :
+meson test --num-processes 1 -C builddir || :
 ./pw-uninstalled.sh
 pushd builddir/src/examples
-export PIPEWIRE_DEBUG=4
-timeout 4s ./audio-src || :
-timeout 3s ./audio-dsp-filter || :
-timeout 3s ./audio-dsp-src || :
-unset PIPEWIRE_DEBUG
 timeout 4s ./audio-src || :
 timeout 3s ./audio-dsp-filter || :
 timeout 3s ./audio-dsp-src || :
 popd
-# pushd builddir/subprojects/media-session/src/
-# export PIPEWIRE_DEBUG=4
-# timeout 3s ./pipewire-media-session || :
-# unset PIPEWIRE_DEBUG
-# timeout 3s ./pipewire-media-session || :
-# popd
