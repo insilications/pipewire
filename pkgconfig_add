@@ -8,6 +8,7 @@ glib-2.0
 gstreamer-1.0
 gstreamer-plugins-base-1.0
 jack
+libcanberra
 libcap
 libpulse
 libsystemd

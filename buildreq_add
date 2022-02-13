@@ -1,7 +1,5 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.SDL2-dev
-SDL2
-SDL2-dev
 alsa-lib
 alsa-lib-dev
 alsa-plugins
@@ -17,6 +15,7 @@ binutils-dev
 buildreq-cmake
 buildreq-configure
 buildreq-distutils3
+buildreq-meson
 bzip2-dev
 bzip2-staticdev
 cairo-dev
@@ -84,6 +83,9 @@ pcre-staticdev
 perl
 perl(XML::Parser)
 perl-XML-Parser
+pipewire
+pipewire-data
+pipewire-dev
 pkg-config
 pkg-config-dev
 pulseaudio
@@ -102,6 +104,8 @@ rtkit-bin
 rtkit-data
 rtkit-libexec
 rtkit-services
+SDL2
+SDL2-dev
 sed
 serd
 serd-dev
@@ -109,9 +113,9 @@ serd-staticdev
 sord
 sord-dev
 sord-staticdev
+speex-dev
 speexdsp-dev
 speexdsp-staticdev
-speex-dev
 speex-staticdev
 sqlite-autoconf-dev
 sratom
