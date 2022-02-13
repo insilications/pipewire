@@ -1,4 +1,12 @@
+libpipewire-0.3.so.0:__gcov_average_profiler_atomic
+libpipewire-0.3.so.0:__gcov_dump
+libpipewire-0.3.so.0:__gcov_indirect_call_profiler_v4
+libpipewire-0.3.so.0:__gcov_indirect_call_profiler_v4_atomic
+libpipewire-0.3.so.0:__gcov_ior_profiler_atomic
+libpipewire-0.3.so.0:__gcov_reset
+libpipewire-0.3.so.0:__gcov_topn_values_profiler_atomic
 libpipewire-0.3.so.0:_pw_log_topic_new
+libpipewire-0.3.so.0:mangle_path
 libpipewire-0.3.so.0:pw_buffers_clear
 libpipewire-0.3.so.0:pw_buffers_negotiate
 libpipewire-0.3.so.0:pw_check_option
@@ -10,6 +18,9 @@ libpipewire-0.3.so.0:pw_conf_load_state
 libpipewire-0.3.so.0:pw_conf_save_state
 libpipewire-0.3.so.0:pw_context_add_listener
 libpipewire-0.3.so.0:pw_context_add_spa_lib
+libpipewire-0.3.so.0:pw_context_conf_section_for_each
+libpipewire-0.3.so.0:pw_context_conf_section_match_rules
+libpipewire-0.3.so.0:pw_context_conf_update_props
 libpipewire-0.3.so.0:pw_context_connect
 libpipewire-0.3.so.0:pw_context_connect_fd
 libpipewire-0.3.so.0:pw_context_connect_self
@@ -126,6 +137,7 @@ libpipewire-0.3.so.0:pw_global_get_id
 libpipewire-0.3.so.0:pw_global_get_object
 libpipewire-0.3.so.0:pw_global_get_permissions
 libpipewire-0.3.so.0:pw_global_get_properties
+libpipewire-0.3.so.0:pw_global_get_serial
 libpipewire-0.3.so.0:pw_global_get_type
 libpipewire-0.3.so.0:pw_global_get_version
 libpipewire-0.3.so.0:pw_global_is_type
