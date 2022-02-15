@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : pipewire
 Version  : 0.3.45
-Release  : 651
+Release  : 652
 URL      : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.45.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/pipewire/pipewire-v0.3.45.tar.gz
 Summary  : No detailed summary available
@@ -259,17 +259,17 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1644952852
+export SOURCE_DATE_EPOCH=1644953325
 export GCC_IGNORE_WERROR=1
 ## altflags1 content
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--disable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export ASMFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--disable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export CXXFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--disable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export FCFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--disable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export FFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--disable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
-export LDFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--disable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export CFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export ASMFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export CXXFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export FCFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export FFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export LDFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
 export NM=/usr/bin/gcc-nm
