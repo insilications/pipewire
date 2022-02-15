@@ -1,17 +1,17 @@
 ## altflags1
 unset ASFLAGS
-export CFLAGS="-DNDEBUG -O3 -mno-vzeroupper -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer  -Wno-inline"
-export ASMFLAGS="-DNDEBUG -O3 -mno-vzeroupper -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer  -Wno-inline"
+export CFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export ASMFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
 #! -fno-tree-vectorize: disable -ftree-vectorize thus disable -ftree-loop-vectorize and -ftree-slp-vectorize -fopt-info-vec
 #! remove: -flimit-function-alignment -fira-loop-pressure
 #! -funroll-loops maybe dangerous
 #! -pthread -lpthread -fexceptions
-export CXXFLAGS="-DNDEBUG -O3 -mno-vzeroupper -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer  -Wno-inline"
+export CXXFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
 #!
-export FCFLAGS="-DNDEBUG -O3 -mno-vzeroupper -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer  -Wno-inline"
-export FFLAGS="-DNDEBUG -O3 -mno-vzeroupper -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer  -Wno-inline"
+export FCFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
+export FFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
 #!
-export LDFLAGS="-DNDEBUG -O3 -mno-vzeroupper -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC -fomit-frame-pointer  -Wno-inline"
+export LDFLAGS="-DNDEBUG -O1 -mno-vzeroupper -march=native -mtune=native -Wall -Wl,--build-id=sha1 -Wl,--enable-new-dtags -fuse-ld=bfd -fuse-linker-plugin -fno-lto -Wp,-D_REENTRANT -pipe -ffat-lto-objects -fPIC"
 #!
 export AR=/usr/bin/gcc-ar
 export RANLIB=/usr/bin/gcc-ranlib
