@@ -83,9 +83,6 @@ pcre-staticdev
 perl
 perl(XML::Parser)
 perl-XML-Parser
-pipewire
-pipewire-data
-pipewire-dev
 pkg-config
 pkg-config-dev
 pulseaudio
