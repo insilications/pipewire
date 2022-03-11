@@ -7,6 +7,7 @@ export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 # export ACP_PROFILES_DIR=/builddir/build/BUILD/pipewire/builddir/spa/plugins/alsa/mixer/profile-sets
 meson test --num-processes 1 -C builddir || :
 ./pw-uninstalled.sh
+export $(dbus-launch)
 pushd builddir/src/examples
 timeout 4s ./audio-src || :
 timeout 3s ./audio-dsp-filter || :
