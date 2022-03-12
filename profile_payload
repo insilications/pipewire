@@ -1,26 +1,22 @@
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
 export LD_LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
 export LIBRARY_PATH="/usr/local/nvidia/lib64:/usr/local/nvidia/lib64/gbm:/usr/local/nvidia/lib64/vdpau:/usr/local/nvidia/lib64/xorg/modules/drivers:/usr/local/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/haswell:/usr/lib64/dri:/usr/lib64:/usr/lib:/aot/intel/oneapi/compiler/latest/linux/compiler/lib/intel64_lin:/aot/intel/oneapi/compiler/latest/linux/lib:/aot/intel/oneapi/mkl/latest/lib/intel64:/aot/intel/oneapi/tbb/latest/lib/intel64/gcc4.8:/usr/share:/usr/lib64/wine:/usr/local/nvidia/lib32:/usr/local/nvidia/lib32/vdpau:/usr/lib32:/usr/lib32/wine"
-meson test --num-processes 1 -C builddir || :
 #!
-export PIPEWIRE_CONFIG_DIR="/builddir/build/BUILD/pipewire/builddir/}/src/daemon"
-# the directory with SPA plugins
-export SPA_PLUGIN_DIR="/builddir/build/BUILD/pipewire/builddir/}/spa/plugins"
+export PIPEWIRE_CONFIG_DIR="/builddir/build/BUILD/pipewire/builddir//src/daemon"
+export SPA_PLUGIN_DIR="/builddir/build/BUILD/pipewire/builddir//spa/plugins"
 export SPA_DATA_DIR="/builddir/build/BUILD/pipewire/spa/plugins"
-# the directory with pipewire modules
-export PIPEWIRE_MODULE_DIR="/builddir/build/BUILD/pipewire/builddir/}/src/modules"
-export PATH="/builddir/build/BUILD/pipewire/builddir/}/src/daemon:/builddir/build/BUILD/pipewire/builddir/}/src/tools:/builddir/build/BUILD/pipewire/builddir/}/src/media-session:/builddir/build/BUILD/pipewire/builddir/}/src/examples:${PATH}"
-export LD_LIBRARY_PATH="/builddir/build/BUILD/pipewire/builddir/}/src/pipewire/:/builddir/build/BUILD/pipewire/builddir/}/pipewire-jack/src/${LD_LIBRARY_PATH+":$LD_LIBRARY_PATH"}"
-export GST_PLUGIN_PATH="/builddir/build/BUILD/pipewire/builddir/}/src/gst/${GST_PLUGIN_PATH+":${GST_PLUGIN_PATH}"}"
-# the directory with card profiles and paths
+export PIPEWIRE_MODULE_DIR="/builddir/build/BUILD/pipewire/builddir//src/modules"
+export PATH="/builddir/build/BUILD/pipewire/builddir//src/daemon:/builddir/build/BUILD/pipewire/builddir//src/tools:/builddir/build/BUILD/pipewire/builddir//src/media-session:/builddir/build/BUILD/pipewire/builddir//src/examples:${PATH}"
+export LD_LIBRARY_PATH="/builddir/build/BUILD/pipewire/builddir//src/pipewire/:/builddir/build/BUILD/pipewire/builddir//pipewire-jack/src/${LD_LIBRARY_PATH+":$LD_LIBRARY_PATH"}"
+export GST_PLUGIN_PATH="/builddir/build/BUILD/pipewire/builddir//src/gst/${GST_PLUGIN_PATH+":${GST_PLUGIN_PATH}"}"
 export ACP_PATHS_DIR="/builddir/build/BUILD/pipewire/spa/plugins/alsa/mixer/paths"
 export ACP_PROFILES_DIR="/builddir/build/BUILD/pipewire/spa/plugins/alsa/mixer/profile-sets"
-# ALSA plugin directory
-export ALSA_PLUGIN_DIR="/builddir/build/BUILD/pipewire/builddir/}/pipewire-alsa/alsa-plugins"
+export ALSA_PLUGIN_DIR="/builddir/build/BUILD/pipewire/builddir//pipewire-alsa/alsa-plugins"
 export PW_UNINSTALLED=1
-export PKG_CONFIG_PATH="/builddir/build/BUILD/pipewire/builddir/}/meson-uninstalled/:${PKG_CONFIG_PATH}"
+export PKG_CONFIG_PATH="/builddir/build/BUILD/pipewire/builddir//meson-uninstalled/:${PKG_CONFIG_PATH}"
 #! pushd builddir/src/examples
-timeout 4s ./audio-src || :
-timeout 3s ./audio-dsp-filter || :
-timeout 3s ./audio-dsp-src || :
+meson test --num-processes 1 -C builddir || :
+timeout 4s audio-src || :
+timeout 3s audio-dsp-filter || :
+timeout 3s audio-dsp-src || :
 #! popd
